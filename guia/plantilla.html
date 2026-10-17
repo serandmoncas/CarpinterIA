@@ -3,84 +3,192 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guía del curso · CarpinterIA</title>
+<title>Guía del curso CarpinterIA</title>
 <!-- Archivo generado: editar guia/plantilla.html y correr python3 guia/generar_guia.py -->
 <style>
+  @font-face { font-family: "Archivo"; src: url("fuentes/archivo-latin-wdth-normal.woff2") format("woff2");
+    font-weight: 100 900; font-stretch: 62% 125%; }
+  @font-face { font-family: "Atkinson"; src: url("fuentes/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "Atkinson"; src: url("fuentes/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+  @font-face { font-family: "Atkinson"; src: url("fuentes/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+  /* Atkinson tacha el cero; en medidas como 2150 parece un error. Los dígitos salen de Archivo. */
+  @font-face { font-family: "Atkinson"; src: url("fuentes/archivo-latin-wdth-normal.woff2") format("woff2");
+    font-weight: 100 900; font-stretch: 62% 125%; unicode-range: U+0030-0039; }
+  @font-face { font-family: "Atkinson"; src: url("fuentes/archivo-latin-wdth-normal.woff2") format("woff2");
+    font-weight: 100 900; font-style: italic; unicode-range: U+0030-0039; }
+
   :root {
-    --tinta: #1f1b16;
-    --suave: #5c554c;
-    --linea: #cfc7bb;
-    --fondo-tabla: #f3eee6;
-    --acento: #b5541b;
-    --papel: #fffdf9;
+    --papel: #ffffff;
+    --grafito: #24272b;      /* lápiz de carpintero: texto */
+    --metro: #f2b705;        /* cinta métrica: el único acento */
+    --metro-claro: #fff4cc;
+    --ristretto: #4a3328;    /* la melamina del curso: piezas en los diagramas */
+    --cota: #2f5da8;         /* lápiz de cota: medidas en los diagramas */
+    --canto: #8a8f96;        /* gris canto: texto secundario */
+    --linea: #d5d8dc;
+    --fondo-tabla: #f1f2f4;
+    --medianil: 44mm;        /* columna de los subtítulos */
   }
   @page {
     size: letter;
-    margin: 18mm 16mm 20mm;
-    @bottom-center { content: "CarpinterIA · Guía del curso · " counter(page); font: 8pt Georgia, serif; color: #5c554c; }
+    margin: 16mm 15mm 18mm;
+    @bottom-left { content: "Guía del curso CarpinterIA"; font: 7.5pt "Archivo", sans-serif; color: #8a8f96; }
+    @bottom-right { content: counter(page); font: 700 8pt "Archivo", sans-serif; color: #24272b; }
   }
-  @page :first { @bottom-center { content: none; } }
+  @page :first { @bottom-left { content: none; } @bottom-right { content: none; } }
+
   * { box-sizing: border-box; }
-  html { background: var(--papel); }
+  html { background: var(--papel); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body {
-    margin: 0 auto; padding: 32px 20px 64px; max-width: 820px;
-    font: 11pt/1.5 Georgia, "Times New Roman", serif; color: var(--tinta); background: var(--papel);
+    margin: 0 auto; padding: 40px 24px 72px; max-width: 860px;
+    font: 10.5pt/1.5 "Atkinson", "Helvetica Neue", Arial, sans-serif; color: var(--grafito); background: var(--papel);
+    font-variant-numeric: tabular-nums;
   }
-  h1, h2, h3, .portada p.marca { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.2; }
-  h2 { font-size: 20pt; margin: 0 0 6px; color: var(--acento); break-after: avoid; }
-  h2 .num { color: var(--suave); font-weight: 400; margin-right: 6px; }
-  h3 { font-size: 13pt; margin: 22px 0 6px; break-after: avoid; }
+  h1, h2, h3 { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; color: var(--grafito); }
   p, li { orphans: 3; widows: 3; }
-  .entrada { font-size: 12pt; color: var(--suave); margin-top: 0; }
-  section.capitulo { break-before: page; padding-top: 4px; }
-  table { width: 100%; border-collapse: collapse; margin: 10px 0 6px; font: 9.5pt/1.35 "Helvetica Neue", Arial, sans-serif; }
-  th, td { border: 1px solid var(--linea); padding: 5px 7px; text-align: left; vertical-align: top; }
-  th { background: var(--fondo-tabla); }
-  td.num, th.num { text-align: right; white-space: nowrap; }
+  strong { font-weight: 700; }
+  sup.f { font: 600 6.5pt "Archivo", sans-serif; color: var(--canto); }
+
+  /* La cinta métrica: marcas de 1, 5 y 10 mm. */
+  .metro {
+    background-color: var(--metro);
+    background-image:
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.35mm, transparent 0.35mm 10mm),
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.3mm, transparent 0.3mm 5mm),
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.2mm, transparent 0.2mm 1mm);
+    background-size: 100% 5mm, 100% 3.2mm, 100% 1.8mm;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+  }
+
+  /* Apertura de capítulo: el número cae en su centímetro de la cinta, así sirve de índice al hojear. */
+  section.capitulo { break-before: page; }
+  section.capitulo > h2 {
+    position: relative; margin: 0 0 3mm; padding-top: 17mm;
+    font-size: 24pt; font-weight: 800; font-stretch: 115%; line-height: 1.08; letter-spacing: -0.01em;
+    break-after: avoid;
+  }
+  section.capitulo > h2::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 11mm;
+    background-color: var(--metro);
+    background-image:
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.35mm, transparent 0.35mm 10mm),
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.3mm, transparent 0.3mm 5mm),
+      repeating-linear-gradient(90deg, var(--grafito) 0 0.2mm, transparent 0.2mm 1mm);
+    background-size: 100% 5mm, 100% 3.2mm, 100% 1.8mm;
+    background-repeat: no-repeat;
+  }
+  section.capitulo > h2 .num {
+    position: absolute; top: 4.6mm; left: calc(var(--n, 0) * 10mm + 0.9mm);
+    font-size: 13pt; font-weight: 800; font-stretch: 100%; line-height: 1;
+  }
+  section.capitulo > h2.segundo { break-before: page; }
+  .entrada { margin: 0 0 6mm; max-width: 150mm; font-size: 12pt; line-height: 1.45; color: var(--grafito); }
+
+  /* Manual técnico: subtítulos en la columna izquierda, texto en la derecha. */
+  section.capitulo > * { margin-left: var(--medianil); }
+  section.capitulo > h2, section.capitulo > .entrada, section.capitulo > .ancha,
+  section.capitulo > figure.foto, section.capitulo > figure.ancha { margin-left: 0; }
+  section.capitulo > h3 {
+    float: left; clear: both; width: calc(var(--medianil) - 6mm); margin: 1mm 0 3mm -0px;
+    font-size: 11pt; font-weight: 700; font-stretch: 100%; line-height: 1.25;
+    padding-top: 2mm; border-top: 0.6mm solid var(--grafito);
+  }
+  section.capitulo > h3 + * { margin-top: 1mm; }
+  section.capitulo > .ancha, section.capitulo > figure { clear: both; }
+  h3 { font-size: 11pt; font-weight: 700; margin: 4mm 0 2mm; break-after: avoid; }
+  section.capitulo > ul, section.capitulo > ol { padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  li::marker { color: var(--canto); }
+  ol > li::marker { font: 700 9pt "Archivo", sans-serif; color: var(--grafito); }
+
+  table { width: auto; min-width: 100%; border-collapse: collapse; margin: 2mm 0 2mm; font: 9pt/1.35 "Atkinson", sans-serif; }
+  section.capitulo > table { width: calc(100% - var(--medianil)); min-width: 0; }
+  section.capitulo > table.ancha { width: 100%; break-inside: avoid; }
+  th, td { border-bottom: 0.25mm solid var(--linea); padding: 1.6mm 2mm; text-align: left; vertical-align: top; }
+  th { font: 700 8pt "Archivo", sans-serif; border-bottom: 0.5mm solid var(--grafito); background: none; }
+  td.num, th.num { text-align: right; white-space: nowrap; font-family: "Archivo", sans-serif; font-stretch: 90%; }
   tr { break-inside: avoid; }
-  .pie-tabla { font: 9pt "Helvetica Neue", Arial, sans-serif; color: var(--suave); margin-top: 2px; }
-  figure { margin: 14px 0; break-inside: avoid; }
-  figure svg { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto; }
+  .pie-tabla { font-size: 8.5pt; color: var(--canto); margin-top: 1mm; }
+
+  figure { margin: 4mm 0; break-inside: avoid; }
+  figure svg { width: 100%; max-width: 130mm; height: auto; display: block; }
   figure.ancha svg { max-width: none; }
-  figure.pequena svg { max-width: 300px; }
-  figcaption { font: 9pt "Helvetica Neue", Arial, sans-serif; color: var(--suave); margin-top: 4px; }
-  .recuadro { border-left: 4px solid var(--acento); background: var(--fondo-tabla); padding: 8px 12px; margin: 12px 0; break-inside: avoid; }
-  .recuadro p { margin: 4px 0; }
-  .formula { font: 12pt "Courier New", monospace; background: var(--fondo-tabla); padding: 8px 12px; display: inline-block; }
-  sup.f { font-size: 7pt; color: var(--suave); }
-  .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  ol.pasos > li { margin-bottom: 6px; }
-  .check li { list-style: none; margin-left: -18px; }
-  .check li::before { content: "☐ "; }
-  .portada { min-height: 230mm; display: flex; flex-direction: column; justify-content: center; }
-  .portada p.marca { color: var(--acento); font-size: 12pt; letter-spacing: 0.04em; margin: 0; }
-  .portada h1 { font-size: 34pt; margin: 8px 0 12px; }
-  .portada .datos { margin-top: 48px; font-family: "Helvetica Neue", Arial, sans-serif; }
-  .portada .datos p { border-bottom: 1px solid var(--linea); padding: 14px 0 4px; margin: 0; }
-  .indice ol { columns: 2; column-gap: 32px; padding-left: 20px; }
-  .cuadricula { height: 120mm; border: 1px solid var(--linea);
-    background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+  figure.pequena svg { max-width: 82mm; }
+  figcaption { font-size: 8.5pt; color: var(--canto); margin-top: 1.5mm; }
+
+  /* Fotos: mientras no exista el archivo, el recuadro muestra el prompt para generarla. */
+  figure.foto img, figure.foto .prompt { display: block; width: 100%; object-fit: cover; }
+  figure.foto .prompt {
+    border: 0.35mm dashed var(--canto); background: #fafafa; padding: 4mm 5mm;
+    display: flex; flex-direction: column; justify-content: center; gap: 2mm; overflow: hidden;
+  }
+  .prompt .archivo { margin: 0; font: 700 8.5pt "Archivo", sans-serif; }
+  .prompt .archivo span { font-weight: 400; color: var(--canto); }
+  .prompt .texto { margin: 0; font-size: 8pt; line-height: 1.4; color: #4b5057; }
+  figure.foto.media { display: grid; grid-template-columns: 82mm 1fr; column-gap: 5mm; align-items: end;
+    margin-left: var(--medianil) !important; }
+  figure.foto.media figcaption { margin: 0 0 1mm; border-top: 0.6mm solid var(--grafito); padding-top: 1.5mm; color: var(--grafito); }
+  figure.foto.media .prompt { padding: 3mm 3.5mm; }
+  figure.foto.media .prompt .texto { font-size: 7pt; line-height: 1.32; }
+
+  .recuadro { padding: 3mm 4mm; margin: 4mm 0; break-inside: avoid; }
+  .recuadro p { margin: 0; }
+  .recuadro.ojo { background: var(--metro-claro); border-left: 1.6mm solid var(--metro); }
+  .recuadro.regla { border: 0.35mm solid var(--grafito); }
+  .recuadro strong:first-child { font-family: "Archivo", sans-serif; }
+
+  .formula { display: inline-block; margin: 1mm 0 3mm; padding: 2.5mm 4mm; border: 0.35mm solid var(--grafito);
+    font: 600 12pt "Archivo", sans-serif; font-stretch: 105%; }
+  .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .check { padding-left: 0 !important; }
+  .check li { list-style: none; padding-left: 6mm; position: relative; }
+  .check li::before { content: ""; position: absolute; left: 0; top: 0.9mm; width: 3.2mm; height: 3.2mm; border: 0.3mm solid var(--grafito); }
+
+  .portada { display: flex; flex-direction: column; }
+  .portada .metro { height: 11mm; margin-bottom: 10mm; }
+  .portada .marca { margin: 0 0 4mm; font: 600 10pt "Archivo", sans-serif; color: var(--canto); }
+  .portada h1 { margin: 0 0 5mm; font-size: 40pt; font-weight: 800; font-stretch: 118%; line-height: 1.02; letter-spacing: -0.015em; max-width: 170mm; }
+  .portada .entrada { margin-bottom: 8mm; }
+  .portada figure.foto { margin: 0 0 8mm; }
+  .portada .datos { margin-top: 4mm; display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
+  .portada .datos p { margin: 0; padding: 5mm 0 1mm; border-bottom: 0.3mm solid var(--grafito); font: 600 9pt "Archivo", sans-serif; }
+
+  .indice ol { columns: 2; column-gap: 10mm; padding-left: 7mm; margin-top: 0; }
+  .indice ol li { font: 600 10.5pt "Archivo", sans-serif; margin-bottom: 1.6mm; break-inside: avoid; }
+
+  section.capitulo > h3.pagina-croquis { break-before: page; float: none; width: auto; margin-left: 0; }
+  .cuadricula { height: 200mm; break-inside: avoid; border: 0.3mm solid var(--linea);
+    background-image: linear-gradient(var(--linea) 0.2mm, transparent 0.2mm), linear-gradient(90deg, var(--linea) 0.2mm, transparent 0.2mm);
     background-size: 5mm 5mm; }
-  .vacia td { height: 9mm; }
-  .fuentes li { font-size: 9pt; overflow-wrap: anywhere; margin-bottom: 3px; }
-  .lineas { height: 9mm; border-bottom: 1px solid var(--linea); }
-  svg text { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11px; fill: #1f1b16; }
-  svg .pieza { fill: #efe6d8; stroke: #1f1b16; stroke-width: 1; }
-  svg .oscura { fill: #d9c6aa; stroke: #1f1b16; stroke-width: 1; }
-  svg .cota { stroke: #b5541b; stroke-width: 0.8; fill: none; }
-  svg .cota-t { fill: #b5541b; font-size: 11px; }
-  svg .oculta { fill: none; stroke: #1f1b16; stroke-width: 0.8; stroke-dasharray: 4 3; }
-  @media screen and (max-width: 600px) {
-    body { padding: 16px 16px 48px; font-size: 10.5pt; }
-    .dos-columnas { grid-template-columns: 1fr; }
+  .vacia td { height: 9mm; border: 0.25mm solid var(--linea); }
+  .fuentes { font-size: 8.5pt; line-height: 1.35; }
+  .fuentes li { overflow-wrap: anywhere; margin-bottom: 1mm; }
+  .lineas { height: 9mm; border-bottom: 0.25mm solid var(--linea); }
+
+  svg text { font-family: "Archivo", sans-serif; font-size: 11px; fill: #24272b; }
+  svg .pieza { fill: #ece6e1; stroke: #4a3328; stroke-width: 1; }
+  svg .oscura { fill: #cdbdb1; stroke: #4a3328; stroke-width: 1; }
+  svg .cota { stroke: #2f5da8; stroke-width: 0.9; fill: none; }
+  svg .cota-t { fill: #2f5da8; font-size: 11px; font-weight: 600; }
+  svg .oculta { fill: none; stroke: #4a3328; stroke-width: 0.8; stroke-dasharray: 4 3; }
+
+  @media screen and (max-width: 640px) {
+    body { padding: 20px 16px 48px; font-size: 10.5pt; }
+    section.capitulo > * { margin-left: 0; }
+    section.capitulo > h3 { float: none; width: auto; }
+    section.capitulo > table { width: 100%; }
+    figure.foto.media { grid-template-columns: 1fr; margin-left: 0 !important; }
+    figure.foto.media figcaption { margin-top: 1.5mm; }
+    .dos-columnas, .portada .datos { grid-template-columns: 1fr; }
     .indice ol { columns: 1; }
+    .portada h1 { font-size: 30pt; }
+    section.capitulo > h2 { font-size: 20pt; }
+    section.capitulo > h2 .num { left: auto; right: 2mm; }
     table { font-size: 8.5pt; }
   }
   @media print {
-    html, body { background: #fff; }
-    body { padding: 0; max-width: none; font-size: 10pt; line-height: 1.4; }
-    h3 { margin-top: 14px; }
-    th, td { padding: 4px 6px; }
+    body { padding: 0; max-width: none; font-size: 10pt; line-height: 1.45; }
     a { color: inherit; text-decoration: none; }
   }
 </style>
@@ -88,9 +196,17 @@
 <body>
 
 <section class="portada">
-  <p class="marca">CarpinterIA · Guarne, Antioquia</p>
+  <div class="metro" aria-hidden="true"></div>
+  <p class="marca">CarpinterIA, Guarne (Antioquia)</p>
   <h1>Guía del curso de carpintería en melamina</h1>
   <p class="entrada">Para el curso express de un día y para el curso completo de 4 sesiones. Llévala al taller, escríbele encima y guárdala para tus próximos muebles.</p>
+  <figure class="foto">
+    <div class="prompt" data-archivo="portada.jpg" data-alt="Una caja de herramientas del curso express, en pleno ensamble." style="aspect-ratio: 16 / 9">
+      <p class="archivo">Imagen por generar: portada.jpg <span>(proporción 16:9, prompt para Nano Banana)</span></p>
+      <p class="texto">Close-up of an adult Latin American beginner's hands driving a screw with a cordless drill into a small open toolbox made of dark-brown melamine, held by a bar clamp on the work table. A wooden dowel handle crosses the top of the box. A yellow tape measure and a flat carpenter's pencil lie nearby. Green mountains are softly out of focus through the window. Aspect ratio 16:9. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Una caja de herramientas del curso express, en pleno ensamble.</figcaption>
+  </figure>
   <div class="datos">
     <p>Nombre:</p>
     <p>Curso: &nbsp;☐ Express &nbsp;&nbsp;☐ Completo</p>
@@ -121,7 +237,7 @@
     <li>Fuentes</li>
   </ol>
 
-  <h3>1 · Cómo usar esta guía</h3>
+  <h3>Cómo usar esta guía</h3>
   <p>El curso tiene dos formatos. En el <strong>express</strong>, de un día, armas una caja de herramientas pequeña con piezas que llegan cortadas. En el <strong>completo</strong>, de 4 sesiones, cada sesión es un proyecto pequeño que hace parte de un proyecto grande que escoges para tu casa; lo que falta lo terminas en casa con la misma técnica.</p>
   <ul>
     <li>Todas las medidas están en milímetros (mm), salvo que se diga otra cosa.</li>
@@ -129,14 +245,22 @@
     <li>Los números pequeños entre corchetes, como <sup class="f">[1]</sup>, remiten a la lista de fuentes del final.</li>
     <li>Las tablas de despiece y de holguras salen de la misma calculadora con la que se hacen los pedidos, así que coinciden con lo que se manda a cortar.</li>
   </ul>
-  <div class="recuadro">
+  <div class="recuadro regla">
     <p><strong>Regla del curso:</strong> mide dos veces, perfora una. En melamina casi nada se corrige: una perforación mal puesta queda a la vista.</p>
   </div>
 </section>
 
 <section class="capitulo" id="seguridad">
-  <h2><span class="num">2</span>Seguridad</h2>
+  <h2 style="--n:2"><span class="num">2</span>Seguridad</h2>
   <p class="entrada">Antes de prender cualquier herramienta. Estas reglas valen para todo el curso y para tu casa.</p>
+
+  <figure class="foto media">
+    <div class="prompt" data-archivo="seguridad-epp.jpg" data-alt="El equipo de protección que se usa en todo el curso." style="aspect-ratio: 3 / 2">
+      <p class="archivo">Imagen por generar: seguridad-epp.jpg <span>(proporción 3:2, prompt para Nano Banana)</span></p>
+      <p class="texto">Top-down flat lay on a white melamine surface of personal protective equipment for woodworking, neatly arranged in a grid: clear safety glasses, over-ear hearing protectors, a white FFP3 dust mask, a hair tie, and a pair of closed leather work shoes. No gloves. Aspect ratio 3:2. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>El equipo de protección que se usa en todo el curso.</figcaption>
+  </figure>
 
   <h3>Lo que llevas puesto</h3>
   <ul>
@@ -165,8 +289,16 @@
 </section>
 
 <section class="capitulo" id="materiales">
-  <h2><span class="num">3</span>Materiales</h2>
+  <h2 style="--n:3"><span class="num">3</span>Materiales</h2>
   <p class="entrada">En el curso trabajamos con melamina de 15 mm. Conviene entender qué es y en qué se diferencia de la madera.</p>
+
+  <figure class="foto media">
+    <div class="prompt" data-archivo="materiales-tableros.jpg" data-alt="De arriba abajo: melamina con tapacanto, MDF, HDF de 3 mm y pino." style="aspect-ratio: 3 / 2">
+      <p class="archivo">Imagen por generar: materiales-tableros.jpg <span>(proporción 3:2, prompt para Nano Banana)</span></p>
+      <p class="texto">Macro photograph of the cut edges of four boards stacked with a small gap between them, seen from the side to show their cross-sections: particleboard core with dark-brown melamine on both faces and dark-brown PVC edge banding on one edge; raw light-brown MDF; a thin 3 mm hardboard sheet; a plank of pine wood showing its grain. Aspect ratio 3:2. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>De arriba abajo: melamina con tapacanto, MDF, HDF de 3 mm y pino.</figcaption>
+  </figure>
 
   <h3>Los tableros</h3>
   <table>
@@ -197,8 +329,16 @@
 </section>
 
 <section class="capitulo" id="herramientas">
-  <h2><span class="num">4</span>Herramientas</h2>
+  <h2 style="--n:4"><span class="num">4</span>Herramientas</h2>
   <p class="entrada">El curso pone las herramientas. Esta lista te sirve para saber qué comprar después, en orden de prioridad.</p>
+
+  <figure class="foto">
+    <div class="prompt" data-archivo="herramientas.jpg" data-alt="Las herramientas y brocas del curso." style="aspect-ratio: 16 / 9">
+      <p class="archivo">Imagen por generar: herramientas.jpg <span>(proporción 16:9, prompt para Nano Banana)</span></p>
+      <p class="texto">Top-down flat lay of woodworking tools on a white melamine surface, evenly spaced: a cordless drill-driver, a row of drill bits (a 3 mm wood bit, a countersink bit, a stepped confirmat bit, a 25 mm spade bit and a 35 mm Forstner bit), two bar clamps, a combination square, a yellow tape measure and a carpenter's pencil. Aspect ratio 16:9. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Las herramientas y brocas del curso.</figcaption>
+  </figure>
 
   <table>
     <thead><tr><th>Herramienta</th><th>Para qué</th><th>Prioridad</th></tr></thead>
@@ -229,7 +369,7 @@
 </section>
 
 <section class="capitulo" id="cortar">
-  <h2><span class="num">5</span>Medir, trazar y cortar</h2>
+  <h2 style="--n:5"><span class="num">5</span>Medir, trazar y cortar</h2>
   <p class="entrada">En el curso la melamina la corta Madecentro con máquina. Igual necesitas saber medir, trazar y cortar para las prácticas en MDF y para ajustes en casa.</p>
 
   <h3>Medir y trazar</h3>
@@ -256,13 +396,13 @@
     <li>Una hoja sin filo hace que la sierra se desvíe o se trabe<sup class="f">[22]</sup>.</li>
   </ul>
 
-  <div class="recuadro">
+  <div class="recuadro regla">
     <p><strong>¿Por qué mandamos a cortar la melamina?</strong> La lámina de la melamina se astilla fácil al cortarla con herramientas de mano. Los aserríos usan discos de muchos dientes y una sierra incisora que hace un precorte antes del corte principal<sup class="f">[6]</sup>, y además ponen el tapacanto con máquina.</p>
   </div>
 </section>
 
 <section class="capitulo" id="uniones">
-  <h2><span class="num">6</span>Uniones</h2>
+  <h2 style="--n:6"><span class="num">6</span>Uniones</h2>
   <p class="entrada">Cómo se juntan dos piezas. En el curso usamos tornillo autorroscante para la caja de herramientas y confirmat para los muebles.</p>
 
   <h3>Tornillo autorroscante</h3>
@@ -288,6 +428,13 @@
   <h3>Confirmat</h3>
   <p>Es un tornillo grueso hecho para unir tableros, muy usado en muebles de melamina. En el curso usamos el de 7 × 50. Se perfora con su <strong>broca escalonada</strong>, que hace en un solo paso el agujero para la rosca (5 mm en el caso del 7 × 50) y el asiento de la cabeza<sup class="f">[18]</sup>. No agrandes la perforación ni avellanes de más: el tornillo pierde agarre y la melamina se puede rajar.</p>
 
+  <figure class="foto media">
+    <div class="prompt" data-archivo="uniones-confirmat.jpg" data-alt="Una unión con confirmat, a medio atornillar." style="aspect-ratio: 4 / 3">
+      <p class="archivo">Imagen por generar: uniones-confirmat.jpg <span>(proporción 4:3, prompt para Nano Banana)</span></p>
+      <p class="texto">Macro photograph of a corner joint between two dark-brown melamine panels at 90 degrees, held by a corner clamp. A 7 x 50 mm confirmat screw is half driven through the face of one panel into the edge of the other. The stepped confirmat drill bit lies next to the joint. Aspect ratio 4:3. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Una unión con confirmat, a medio atornillar.</figcaption>
+  </figure>
   <h3>Minifix y tarugos</h3>
   <ul>
     <li><strong>Minifix:</strong> unión que se puede desarmar. Lleva una pieza redonda que se encaja en un agujero de 15 mm hecho con broca especial, y un perno que la jala<sup class="f">[16]</sup>.</li>
@@ -299,7 +446,7 @@
 </section>
 
 <section class="capitulo" id="herrajes">
-  <h2><span class="num">7</span>Herrajes y sistema 32</h2>
+  <h2 style="--n:7"><span class="num">7</span>Herrajes y sistema 32</h2>
 
   <h3>Sistema 32</h3>
   <p>Es la forma estándar de ubicar las perforaciones en los laterales de un mueble. Las hileras de agujeros van a <strong>37 mm</strong> del canto delantero (y del trasero), los agujeros van cada <strong>32 mm</strong> y tienen <strong>5 mm</strong> de diámetro<sup class="f">[12]</sup><sup class="f">[17]</sup>. Con esa plantilla se ubican entrepaños móviles, bisagras y correderas.</p>
@@ -359,6 +506,13 @@
     </div>
   </div>
 
+  <figure class="foto media">
+    <div class="prompt" data-archivo="bisagra-cazoleta.jpg" data-alt="Bisagra de cazoleta de 35 mm instalada." style="aspect-ratio: 4 / 3">
+      <p class="archivo">Imagen por generar: bisagra-cazoleta.jpg <span>(proporción 4:3, prompt para Nano Banana)</span></p>
+      <p class="texto">Macro photograph of a 35 mm concealed cup hinge mounted on the inside face of a dark-brown melamine cabinet door, the door open at 90 degrees, the hinge arm clipped onto its mounting plate on the cabinet side panel. Clean, precise, well lit. Aspect ratio 4:3. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Bisagra de cazoleta de 35 mm instalada.</figcaption>
+  </figure>
   <h3>Correderas telescópicas</h3>
   <ul>
     <li>Entre el costado del cajón y el costado del mueble se deja una holgura de <strong>12,5 a 13 mm por lado</strong><sup class="f">[4]</sup><sup class="f">[11]</sup>. Algunas marcas piden 12,7 mm<sup class="f">[13]</sup>: <em>confírmalo con la ficha de la corredera que compres</em> y ajusta la calculadora.</li>
@@ -369,14 +523,14 @@
 </section>
 
 <section class="capitulo" id="holguras">
-  <h2><span class="num">8</span>Holguras</h2>
+  <h2 style="--n:8"><span class="num">8</span>Holguras</h2>
   <p class="entrada">La holgura es el espacio que se deja para que una pieza abra, corra o entre sin rozar. Estos son los valores que usa la calculadora del curso.</p>
   {{tabla_holguras}}
   <p class="pie-tabla">Las holguras entre frentes son una práctica del oficio, no una norma: la bisagra permite corregir unos milímetros. La de la corredera sí depende del fabricante.</p>
 </section>
 
 <section class="capitulo" id="despiece">
-  <h2><span class="num">9</span>Despiece y pedido a Madecentro</h2>
+  <h2 style="--n:9"><span class="num">9</span>Despiece y pedido a Madecentro</h2>
   <p class="entrada">El despiece es la lista de todas las piezas del mueble con sus medidas. De que esté bien depende todo lo demás.</p>
 
   <h3>La regla del espesor</h3>
@@ -398,7 +552,7 @@
     </svg>
     <figcaption>Frente del mueble sin puertas. Con e = 15 mm, un mueble de 500 mm lleva base y techo de 470 mm.</figcaption>
   </figure>
-  <div class="recuadro">
+  <div class="recuadro ojo">
     <p><strong>El error que más cuesta:</strong> pedir la base o el techo con el ancho exterior, sin descontar los espesores. Las piezas llegan 30 mm más largas y no entran. Por eso en el curso cada lista se revisa en pareja antes de enviarla.</p>
   </div>
 
@@ -420,8 +574,9 @@
 </section>
 
 <section class="capitulo" id="caja">
-  <h2><span class="num">10</span>Proyecto express: caja de herramientas</h2>
+  <h2 style="--n:10"><span class="num">10</span>Proyecto express: caja de herramientas</h2>
   <p class="entrada">Una caja abierta con un palo de madera como manija. Las piezas llegan cortadas y con tapacanto; en el taller se marca, se perfora y se ensambla.</p>
+
 
   <figure class="ancha">
     <svg viewBox="-50 -30 780 340" role="img" aria-label="Caja de herramientas vista de lado y de frente con sus medidas principales">
@@ -496,12 +651,27 @@
     <li><strong>Pon el palo.</strong> Pásalo por los dos agujeros. Fíjalo con un tornillo desde el canto superior de cada cabecera, en el centro, con perforación guía.</li>
     <li><strong>Termina.</strong> Tapa las cabezas de tornillo que quedan a la vista con tapitas adhesivas, limpia las marcas de lápiz y escribe tu nombre por debajo.</li>
   </ol>
+  <figure class="foto media">
+    <div class="prompt" data-archivo="caja-terminada.jpg" data-alt="Así queda la caja terminada." style="aspect-ratio: 4 / 3">
+      <p class="archivo">Imagen por generar: caja-terminada.jpg <span>(proporción 4:3, prompt para Nano Banana)</span></p>
+      <p class="texto">Product photograph of a finished open toolbox on a work table: 45 cm long, 20 cm wide, made of dark-brown melamine with matching edge banding; the two end panels are taller than the sides and have a round hole near the top through which a natural wooden dowel handle passes. Inside: a hammer, two screwdrivers and a tape measure. Three-quarter view from slightly above. Aspect ratio 4:3. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Así queda la caja terminada.</figcaption>
+  </figure>
   <p class="pie-tabla">Diseño basado en la caja de herramientas abierta clásica de madera<sup class="f">[39]</sup><sup class="f">[40]</sup>, adaptada a melamina de 15 mm cortada en Madecentro: las cabeceras quedan rectangulares para que no haga falta sierra.</p>
 </section>
 
 <section class="capitulo" id="nochero">
-  <h2><span class="num">11</span>Proyecto de referencia: el nochero</h2>
+  <h2 style="--n:11"><span class="num">11</span>Proyecto de referencia: el nochero</h2>
   <p class="entrada">Un nochero de 500 × 400 × 550 mm con una puerta y un cajón. Es la opción más pequeña del curso completo y tiene todo lo que lleva un closet: cuerpo, entrepaño, fondo, puerta con bisagra y cajón con corredera.</p>
+
+  <figure class="foto media">
+    <div class="prompt" data-archivo="nochero.jpg" data-alt="El nochero de referencia: una puerta y un cajón." style="aspect-ratio: 4 / 3">
+      <p class="archivo">Imagen por generar: nochero.jpg <span>(proporción 4:3, prompt para Nano Banana)</span></p>
+      <p class="texto">Interior photograph of a finished nightstand, 50 cm wide, 40 cm deep and 55 cm high, made of dark-brown melamine: one drawer on top and one door below, both overlay fronts with slim matte black pulls. It stands next to a simple bed with white linen in a modest Colombian bedroom, a small lamp on top. Aspect ratio 4:3. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>El nochero de referencia: una puerta y un cajón.</figcaption>
+  </figure>
 
   <h3>Lista de corte</h3>
   {{despiece_nochero}}
@@ -528,15 +698,23 @@
 </section>
 
 <section class="capitulo" id="tu-proyecto">
-  <h2><span class="num">12</span>Tu proyecto</h2>
+  <h2 style="--n:12"><span class="num">12</span>Tu proyecto</h2>
   <p class="entrada">En el curso completo escoges un proyecto para tu casa: un closet, un nochero o un mueble para la sala, el comedor, la cocina, la habitación o el baño. En el curso armas el primer módulo; el resto lo terminas en casa.</p>
+
+  <figure class="foto media">
+    <div class="prompt" data-archivo="modulo-closet.jpg" data-alt="En el curso armas el primer módulo; el resto lo terminas en casa." style="aspect-ratio: 4 / 3">
+      <p class="archivo">Imagen por generar: modulo-closet.jpg <span>(proporción 4:3, prompt para Nano Banana)</span></p>
+      <p class="texto">A wall closet made of several dark-brown melamine modules being installed in a bedroom: the first module is finished with its doors, the next one is an open carcass with a spirit level on top, and a cordless drill rests on the floor. The modules are anchored to the wall with metal brackets. Aspect ratio 4:3. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>En el curso armas el primer módulo; el resto lo terminas en casa.</figcaption>
+  </figure>
 
   <h3>Lo que voy a hacer</h3>
   <div class="lineas"></div><div class="lineas"></div>
   <h3>Medidas del espacio (alto × ancho × fondo)</h3>
   <div class="lineas"></div>
-  <h3>Croquis</h3>
-  <div class="cuadricula"></div>
+  <h3 class="pagina-croquis">Croquis</h3>
+  <div class="cuadricula ancha"></div>
   <p class="pie-tabla">Cada cuadro mide 5 mm. Dibuja el mueble de frente y escribe las medidas exteriores.</p>
 </section>
 
@@ -570,11 +748,18 @@
 </section>
 
 <section class="capitulo" id="acabados">
-  <h2><span class="num">13</span>Lijado y acabados</h2>
+  <h2 style="--n:13"><span class="num">13</span>Lijado y acabados</h2>
 
   <h3>En melamina</h3>
   <p>La melamina no se lija ni se pinta: ya viene terminada. El acabado es limpiar las marcas de lápiz y el polvo, tapar las cabezas de tornillo con tapitas del color, y retocar el tapacanto donde haya quedado una rebaba (se quita con lima o formón, sin tocar la lámina)<sup class="f">[5]</sup>.</p>
 
+  <figure class="foto media">
+    <div class="prompt" data-archivo="acabados.jpg" data-alt="Tapitas adhesivas del color de la melamina." style="aspect-ratio: 3 / 2">
+      <p class="archivo">Imagen por generar: acabados.jpg <span>(proporción 3:2, prompt para Nano Banana)</span></p>
+      <p class="texto">Macro photograph of fingertips pressing a small round adhesive screw-cover cap, the same dark-brown color as the melamine, onto a screw head on a melamine panel; a small flat file next to it, used to trim edge banding. Aspect ratio 3:2. Style: realistic documentary photograph, soft natural window light, a small home workshop in Guarne, Antioquia (Colombian Andes) with white walls and a sturdy wooden work table; the furniture material is dark-brown solid-color melamine board with matching edge banding; muted neutral palette with a single tape-measure-yellow accent; shallow depth of field; no text, no logos, no brand names, no watermarks.</p>
+    </div>
+    <figcaption>Tapitas adhesivas del color de la melamina.</figcaption>
+  </figure>
   <h3>En madera y MDF</h3>
   <ul>
     <li><strong>Secuencia de lija:</strong> empieza con 80, sigue con 120 y luego con 150 o 180. No te saltes más de un grano, lija siempre a favor de la veta y limpia el polvo entre granos<sup class="f">[34]</sup>.</li>
@@ -585,7 +770,7 @@
 </section>
 
 <section class="capitulo" id="cuidado">
-  <h2><span class="num">14</span>Cuidado de herramientas y del taller</h2>
+  <h2 style="--n:14"><span class="num">14</span>Cuidado de herramientas y del taller</h2>
   <ul>
     <li>Mantén las herramientas limpias y con filo. Una herramienta dañada se retira y se marca "no usar"<sup class="f">[20]</sup>.</li>
     <li>Un disco que corta lento, astilla más o quema la madera puede estar sucio de resina o sin filo.</li>
@@ -594,7 +779,7 @@
     <li>Guarda los tableros acostados y levantados del piso<sup class="f">[6]</sup>.</li>
   </ul>
 
-  <h2 style="margin-top:28px"><span class="num">15</span>Glosario</h2>
+  <h2 class="segundo" style="--n:15"><span class="num">15</span>Glosario</h2>
   <table>
     <tbody>
       <tr><td><strong>Avellanar</strong></td><td>Hacer un cono en la boca del agujero para que la cabeza del tornillo quede al ras.</td></tr>
@@ -619,7 +804,7 @@
 </section>
 
 <section class="capitulo" id="aprender">
-  <h2><span class="num">16</span>Para seguir aprendiendo</h2>
+  <h2 style="--n:16"><span class="num">16</span>Para seguir aprendiendo</h2>
   <p class="entrada">Recursos revisados en octubre de 2026. Los marcados como gratis los publica su propio autor o fabricante.</p>
 
   <h3>Libros</h3>
@@ -670,7 +855,7 @@
 </section>
 
 <section class="capitulo" id="fuentes">
-  <h2><span class="num">17</span>Fuentes</h2>
+  <h2 style="--n:17"><span class="num">17</span>Fuentes</h2>
   <p class="pie-tabla">Consultadas en octubre de 2026. Los datos de fabricantes cambian: ante la duda, manda la ficha del producto que compres.</p>
   <ol class="fuentes">
     <li>Arauco. Cómo unir tableros con tornillos autorroscantes. https://arauco.com/chile/wp-content/uploads/sites/14/2019/03/12_15955_foll_web_muebleria_unir-autorroscante_chile_28_sep_2015_963.pdf</li>

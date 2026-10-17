@@ -1,0 +1,2 @@
+Archivo (Omnibus-Type) y Atkinson Hyperlegible (Braille Institute), ambas con licencia
+SIL Open Font License 1.1. Descargadas de Fontsource (cdn.jsdelivr.net/npm/@fontsource).
