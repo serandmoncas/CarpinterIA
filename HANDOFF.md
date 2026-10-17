@@ -4,7 +4,12 @@ Actualizado: 17 oct 2026 · Dueño: Sergio Monsalve (Yolombal, Guarne)
 
 ## Objetivo
 
-Montar un curso **vendible** de carpintería en melamina: 4 sesiones de unas 4 h, una cada 15 días. Cada participante diseña, manda a cortar en Madecentro Guarne y arma su propio mueble modular, que se lleva a casa. El piloto es con Carlos y Diana el fin de semana del 24–25 oct 2026.
+Montar un curso **vendible** de carpintería en melamina, en dos formatos:
+
+- **Curso express (1 día, unas 5 h):** para gente sin experiencia. Cada participante arma una caja de herramientas pequeña con piezas que llegan cortadas de Madecentro, y se la lleva. Es la puerta de entrada al curso completo.
+- **Curso completo (4 sesiones de unas 4 h, una cada 15 días):** cada participante escoge un proyecto serio para su casa (closet, nochero, o un mueble de sala, comedor, cocina, habitación o baño). Cada sesión es un proyecto pequeño que hace parte del grande: un cuerpo simple en MDF, un módulo de práctica con entrepaño y el pedido a Madecentro, el primer módulo real armado, y ese módulo con puertas y cajones. El resto del proyecto se termina en casa.
+
+El piloto es con Carlos y Diana el fin de semana del 24–25 oct 2026.
 
 ## Documentos existentes (Claude Docs)
 
@@ -17,7 +22,8 @@ Montar un curso **vendible** de carpintería en melamina: 4 sesiones de unas 4 h
 
 - **Material:** melamina Kronospan Ristretto RH de **15 mm**, de Madecentro. Fondos en HDF de 3 mm. Todas las fórmulas se escriben con `e` (por ejemplo, ancho interior = ancho − 2e).
 - **Corte:** lo hace Madecentro, con tapacanto incluido. En el taller solo se perfora, se ensambla y se ponen los herrajes.
-- **Proyecto del curso:** un nochero de 500 × 400 × 550 mm con una puerta y un cajón. Ambos frentes son sobrepuestos.
+- **Proyecto del curso completo:** lo escoge cada participante. En el curso se arma el primer módulo, que no debe superar el doble del material del nochero. El nochero de 500 × 400 × 550 mm con una puerta y un cajón (frentes sobrepuestos) es la opción más pequeña y el ejemplo de referencia.
+- **Proyecto del curso express:** una caja de herramientas pequeña. Faltan las medidas y el despiece.
 - **Uniones:** confirmat de 7 × 50. Bisagras de cazoleta de 35 mm rectas. Correderas telescópicas de 350 mm.
 - **Lenguaje:** español de Colombia. El voseo se puede usar, pero de forma consistente.
 - **Ubicación del pack de ebooks:** de los 5 ebooks, 4 sirven de apoyo a las sesiones. El de negocio queda como bono o como segundo nivel.
@@ -63,6 +69,7 @@ Holgura de la corredera: unos 13 mm por lado (470 − 26 = 444). **Hay que confi
 - [ ] Cronometrar cada bloque del piloto y hacer una encuesta al final.
 
 ### Material del curso
+- [ ] Definir medidas, despiece y manija de la caja de herramientas del curso express, y agregarla a `despieces/`.
 - [ ] Rehacer en 15 mm, con medidas que cuadren, los despieces de MB: cómoda, zapatero, escritorio, estantería y "cómo leer".
 - [ ] Rehacer en MD: la página de descontar espesor (el ejemplo está al revés), el despiece a escala, la optimización 2 (incluir kerf y refilado) y la lista de corte de ejemplo.
 - [ ] Crear la hoja de pedido para Madecentro (CSV y PDF) con las columnas: pieza, cantidad, largo, ancho, espesor, color, cantos (L1 L2 A1 A2), veta y notas.
