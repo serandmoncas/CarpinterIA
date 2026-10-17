@@ -15,3 +15,11 @@ Material y herramientas para el **curso de carpintería en melamina**. Son 4 ses
 python3 calculadora/despiece.py --ancho 500 --fondo 400 --alto 550 --cajones 1 --puerta sencilla
 python3 -m unittest discover calculadora
 ```
+
+## Hoja de pedido
+
+```sh
+python3 pedido-madecentro/hoja_pedido.py despieces/nochero.csv --cliente "Carlos" > pedido.html
+```
+
+Se abre en el navegador y se imprime o se guarda como PDF. Incluye el área por material y los metros de tapacanto, que sirven para cotizar.
