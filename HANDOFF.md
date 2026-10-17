@@ -70,6 +70,7 @@ Holgura de la corredera: unos 13 mm por lado (470 − 26 = 444). **Hay que confi
 
 ### Material del curso
 - [ ] Definir medidas, despiece y manija de la caja de herramientas del curso express, y agregarla a `despieces/`.
+- [ ] Confirmar con Madecentro que cortan los despuntes a 45° de las cabeceras de la caja (70 × 70 mm) y les ponen tapacanto. Si no, se cortan en el taller con caladora antes del curso.
 - [ ] Rehacer en 15 mm, con medidas que cuadren, los despieces de MB: cómoda, zapatero, escritorio, estantería y "cómo leer".
 - [ ] Rehacer en MD: la página de descontar espesor (el ejemplo está al revés), el despiece a escala, la optimización 2 (incluir kerf y refilado) y la lista de corte de ejemplo.
 - [ ] Crear la hoja de pedido para Madecentro (CSV y PDF) con las columnas: pieza, cantidad, largo, ancho, espesor, color, cantos (L1 L2 A1 A2), veta y notas.

@@ -1,4 +1,4 @@
 pieza,cantidad,largo,ancho,espesor,color,L1,L2,A1,A2,veta,notas
 Base,1,450,200,15,Ristretto RH,1,1,1,1,,
-Cabecera,2,235,200,15,Ristretto RH,1,1,1,0,,perforación para el palo: centrada y a 35 mm del borde superior (se hace en el taller)
+Cabecera,2,235,200,15,Ristretto RH,1,1,1,0,,"en punta: despunte de 70 × 70 mm a 45° en las dos esquinas de arriba, con tapacanto; perforación para el palo: centrada y a 35 mm del borde superior (se hace en el taller)"
 Costado,2,420,105,15,Ristretto RH,1,0,0,0,,
