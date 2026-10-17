@@ -10,6 +10,7 @@ y de los CSV de despieces/, así la guía siempre coincide con lo que se pide a 
 
 import argparse
 import html
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -24,6 +25,7 @@ from hoja_pedido import leer_piezas, totales  # noqa: E402
 PLANTILLA = RAIZ / "guia" / "plantilla.html"
 SALIDA_HTML = RAIZ / "guia" / "guia-del-curso.html"
 SALIDA_PDF = RAIZ / "guia" / "guia-del-curso.pdf"
+IMAGENES = RAIZ / "guia" / "imagenes"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 
@@ -52,10 +54,31 @@ def tabla_despiece(nombre_csv: str) -> str:
         for p in piezas)
     t = totales(piezas)
     resumen = " · ".join(f"{html.escape(m)}: {a:.2f} m²" for m, a in t["area"].items())
-    return ("<table><thead><tr><th>Pieza</th><th class='num'>Cant.</th><th class='num'>Largo</th>"
+    return ("<table class='ancha'><thead><tr><th>Pieza</th><th class='num'>Cant.</th><th class='num'>Largo</th>"
             "<th class='num'>Ancho</th><th>Material</th><th>Tapacanto</th><th>Notas</th></tr></thead>"
             f"<tbody>{filas}</tbody></table>"
             f"<p class='pie-tabla'>Medidas en mm. {resumen} · Tapacanto: {t['tapacanto_m']:.2f} m.</p>")
+
+
+PROMPT_IMAGEN = re.compile(
+    r'<div class="prompt" data-archivo="(?P<archivo>[^"]+)" data-alt="(?P<alt>[^"]*)" style="(?P<estilo>[^"]*)">.*?</div>',
+    re.DOTALL)
+
+
+def poner_imagenes(texto: str) -> str:
+    """Cambia cada recuadro con prompt por su foto cuando ya está en guia/imagenes/.
+
+    Se acepta el archivo con cualquier extensión común, para no depender de cómo se exporte.
+    """
+    def cambiar(m: re.Match) -> str:
+        nombre = Path(m["archivo"]).stem
+        for ext in (".jpg", ".jpeg", ".png", ".webp"):
+            ruta = IMAGENES / f"{nombre}{ext}"
+            if ruta.exists():
+                return (f'<img src="imagenes/{ruta.name}" alt="{m["alt"]}" '
+                        f'style="{m["estilo"]}">')
+        return m[0]
+    return PROMPT_IMAGEN.sub(cambiar, texto)
 
 
 def generar() -> str:
@@ -68,11 +91,13 @@ def generar() -> str:
     for marca, contenido in reemplazos.items():
         assert marca in texto, f"falta {marca} en la plantilla"
         texto = texto.replace(marca, contenido)
-    return texto
+    return poner_imagenes(texto)
 
 
 def exportar_pdf() -> None:
+    # El presupuesto de tiempo virtual deja que carguen las fuentes y las imágenes antes de imprimir.
     subprocess.run([CHROME, "--headless", "--disable-gpu", "--no-pdf-header-footer",
+                    "--run-all-compositor-stages-before-draw", "--virtual-time-budget=10000",
                     f"--print-to-pdf={SALIDA_PDF}", SALIDA_HTML.as_uri()],
                    check=True, capture_output=True)
 
