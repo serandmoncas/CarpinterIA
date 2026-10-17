@@ -8,6 +8,7 @@ Material y herramientas para el **curso de carpintería en melamina**. Son 4 ses
 - `pedido-madecentro/`: plantilla de pedido.
 - `material/`: páginas imprimibles para el curso. `holguras.html` se genera con `python3 calculadora/holguras.py > material/holguras.html`.
 - `piloto/`: hoja para cronometrar el piloto y encuesta final.
+- `guia/`: guía del curso para los estudiantes, en HTML y PDF. El texto está en `guia/plantilla.html`; las tablas de holguras y despieces se llenan desde la calculadora con `python3 guia/generar_guia.py --pdf`.
 - `ebooks/`: fuentes y versiones corregidas del pack de ebooks.
 - `fotos/`: fotos del closet y del piloto.
 

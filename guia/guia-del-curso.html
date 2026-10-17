@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía del curso · CarpinterIA</title>
+<!-- Archivo generado: editar guia/plantilla.html y correr python3 guia/generar_guia.py -->
+<style>
+  :root {
+    --tinta: #1f1b16;
+    --suave: #5c554c;
+    --linea: #cfc7bb;
+    --fondo-tabla: #f3eee6;
+    --acento: #b5541b;
+    --papel: #fffdf9;
+  }
+  @page {
+    size: letter;
+    margin: 18mm 16mm 20mm;
+    @bottom-center { content: "CarpinterIA · Guía del curso · " counter(page); font: 8pt Georgia, serif; color: #5c554c; }
+  }
+  @page :first { @bottom-center { content: none; } }
+  * { box-sizing: border-box; }
+  html { background: var(--papel); }
+  body {
+    margin: 0 auto; padding: 32px 20px 64px; max-width: 820px;
+    font: 11pt/1.5 Georgia, "Times New Roman", serif; color: var(--tinta); background: var(--papel);
+  }
+  h1, h2, h3, .portada p.marca { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.2; }
+  h2 { font-size: 20pt; margin: 0 0 6px; color: var(--acento); break-after: avoid; }
+  h2 .num { color: var(--suave); font-weight: 400; margin-right: 6px; }
+  h3 { font-size: 13pt; margin: 22px 0 6px; break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .entrada { font-size: 12pt; color: var(--suave); margin-top: 0; }
+  section.capitulo { break-before: page; padding-top: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 6px; font: 9.5pt/1.35 "Helvetica Neue", Arial, sans-serif; }
+  th, td { border: 1px solid var(--linea); padding: 5px 7px; text-align: left; vertical-align: top; }
+  th { background: var(--fondo-tabla); }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  tr { break-inside: avoid; }
+  .pie-tabla { font: 9pt "Helvetica Neue", Arial, sans-serif; color: var(--suave); margin-top: 2px; }
+  figure { margin: 14px 0; break-inside: avoid; }
+  figure svg { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto; }
+  figure.ancha svg { max-width: none; }
+  figure.pequena svg { max-width: 300px; }
+  figcaption { font: 9pt "Helvetica Neue", Arial, sans-serif; color: var(--suave); margin-top: 4px; }
+  .recuadro { border-left: 4px solid var(--acento); background: var(--fondo-tabla); padding: 8px 12px; margin: 12px 0; break-inside: avoid; }
+  .recuadro p { margin: 4px 0; }
+  .formula { font: 12pt "Courier New", monospace; background: var(--fondo-tabla); padding: 8px 12px; display: inline-block; }
+  sup.f { font-size: 7pt; color: var(--suave); }
+  .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  ol.pasos > li { margin-bottom: 6px; }
+  .check li { list-style: none; margin-left: -18px; }
+  .check li::before { content: "☐ "; }
+  .portada { min-height: 230mm; display: flex; flex-direction: column; justify-content: center; }
+  .portada p.marca { color: var(--acento); font-size: 12pt; letter-spacing: 0.04em; margin: 0; }
+  .portada h1 { font-size: 34pt; margin: 8px 0 12px; }
+  .portada .datos { margin-top: 48px; font-family: "Helvetica Neue", Arial, sans-serif; }
+  .portada .datos p { border-bottom: 1px solid var(--linea); padding: 14px 0 4px; margin: 0; }
+  .indice ol { columns: 2; column-gap: 32px; padding-left: 20px; }
+  .cuadricula { height: 120mm; border: 1px solid var(--linea);
+    background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+    background-size: 5mm 5mm; }
+  .vacia td { height: 9mm; }
+  .fuentes li { font-size: 9pt; overflow-wrap: anywhere; margin-bottom: 3px; }
+  .lineas { height: 9mm; border-bottom: 1px solid var(--linea); }
+  svg text { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11px; fill: #1f1b16; }
+  svg .pieza { fill: #efe6d8; stroke: #1f1b16; stroke-width: 1; }
+  svg .oscura { fill: #d9c6aa; stroke: #1f1b16; stroke-width: 1; }
+  svg .cota { stroke: #b5541b; stroke-width: 0.8; fill: none; }
+  svg .cota-t { fill: #b5541b; font-size: 11px; }
+  svg .oculta { fill: none; stroke: #1f1b16; stroke-width: 0.8; stroke-dasharray: 4 3; }
+  @media screen and (max-width: 600px) {
+    body { padding: 16px 16px 48px; font-size: 10.5pt; }
+    .dos-columnas { grid-template-columns: 1fr; }
+    .indice ol { columns: 1; }
+    table { font-size: 8.5pt; }
+  }
+  @media print {
+    html, body { background: #fff; }
+    body { padding: 0; max-width: none; font-size: 10pt; line-height: 1.4; }
+    h3 { margin-top: 14px; }
+    th, td { padding: 4px 6px; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="portada">
+  <p class="marca">CarpinterIA · Guarne, Antioquia</p>
+  <h1>Guía del curso de carpintería en melamina</h1>
+  <p class="entrada">Para el curso express de un día y para el curso completo de 4 sesiones. Llévala al taller, escríbele encima y guárdala para tus próximos muebles.</p>
+  <div class="datos">
+    <p>Nombre:</p>
+    <p>Curso: &nbsp;☐ Express &nbsp;&nbsp;☐ Completo</p>
+    <p>Fecha:</p>
+    <p>Mi proyecto:</p>
+  </div>
+</section>
+
+<section class="capitulo indice">
+  <h2>Contenido</h2>
+  <ol>
+    <li>Cómo usar esta guía</li>
+    <li>Seguridad</li>
+    <li>Materiales</li>
+    <li>Herramientas</li>
+    <li>Medir, trazar y cortar</li>
+    <li>Uniones</li>
+    <li>Herrajes y sistema 32</li>
+    <li>Holguras</li>
+    <li>Despiece y pedido a Madecentro</li>
+    <li>Proyecto express: caja de herramientas</li>
+    <li>Proyecto de referencia: el nochero</li>
+    <li>Tu proyecto</li>
+    <li>Lijado y acabados</li>
+    <li>Cuidado de herramientas y del taller</li>
+    <li>Glosario</li>
+    <li>Para seguir aprendiendo</li>
+    <li>Fuentes</li>
+  </ol>
+
+  <h3>1 · Cómo usar esta guía</h3>
+  <p>El curso tiene dos formatos. En el <strong>express</strong>, de un día, armas una caja de herramientas pequeña con piezas que llegan cortadas. En el <strong>completo</strong>, de 4 sesiones, cada sesión es un proyecto pequeño que hace parte de un proyecto grande que escoges para tu casa; lo que falta lo terminas en casa con la misma técnica.</p>
+  <ul>
+    <li>Todas las medidas están en milímetros (mm), salvo que se diga otra cosa.</li>
+    <li>La letra <strong>e</strong> es el espesor del tablero. En el curso usamos melamina de 15 mm, así que e = 15.</li>
+    <li>Los números pequeños entre corchetes, como <sup class="f">[1]</sup>, remiten a la lista de fuentes del final.</li>
+    <li>Las tablas de despiece y de holguras salen de la misma calculadora con la que se hacen los pedidos, así que coinciden con lo que se manda a cortar.</li>
+  </ul>
+  <div class="recuadro">
+    <p><strong>Regla del curso:</strong> mide dos veces, perfora una. En melamina casi nada se corrige: una perforación mal puesta queda a la vista.</p>
+  </div>
+</section>
+
+<section class="capitulo" id="seguridad">
+  <h2><span class="num">2</span>Seguridad</h2>
+  <p class="entrada">Antes de prender cualquier herramienta. Estas reglas valen para todo el curso y para tu casa.</p>
+
+  <h3>Lo que llevas puesto</h3>
+  <ul>
+    <li><strong>Gafas de seguridad certificadas</strong>, no gafas comunes<sup class="f">[22]</sup>. Se usan siempre que haya una herramienta encendida, aunque no seas tú quien la use.</li>
+    <li><strong>Protección auditiva</strong> con la sierra circular y en trabajos largos con herramienta eléctrica<sup class="f">[22]</sup>.</li>
+    <li><strong>Mascarilla para polvo</strong> al cortar, perforar en serie o lijar. El polvo de madera puede causar asma, y para la mayoría de cortes y lijados se recomienda una mascarilla FFP3 bien ajustada a la cara<sup class="f">[19]</sup>. El polvo del MDF es más fino que el de la madera<sup class="f">[23]</sup>.</li>
+    <li>Ropa sin partes sueltas, mangas recogidas, pelo amarrado, sin anillos ni cadenas, y zapato cerrado<sup class="f">[20]</sup>.</li>
+    <li><strong>Sin guantes con herramientas que giran</strong> (taladro, sierra, esmeril): el guante se enreda y arrastra la mano<sup class="f">[21]</sup>. Los guantes sí sirven para cargar tableros.</li>
+  </ul>
+
+  <h3>Cómo se trabaja</h3>
+  <ul>
+    <li><strong>La pieza siempre prensada.</strong> Así tienes las dos manos en la herramienta<sup class="f">[20]</sup>.</li>
+    <li><strong>Desconecta la herramienta</strong> para cambiar broca, disco u hoja, y cuando la limpies<sup class="f">[20]</sup>.</li>
+    <li>Nunca quites la guarda de la sierra circular<sup class="f">[20]</sup>.</li>
+    <li>El cable lejos de la línea de corte. No cargues la herramienta por el cable ni con el dedo en el gatillo<sup class="f">[20]</sup>.</li>
+    <li>Piso despejado y buena luz<sup class="f">[20]</sup>.</li>
+    <li>Los trapos con aceite secante (linaza, aceite danés) pueden prenderse solos si se dejan amontonados. Extiéndelos a secar o mételos en agua<sup class="f">[36]</sup>.</li>
+  </ul>
+
+  <h3>En tu casa</h3>
+  <ul>
+    <li><strong>Ancla a la pared</strong> los muebles altos (closets, bibliotecas, módulos de más de 1 m). Arauco recomienda al menos 2 anclajes<sup class="f">[7]</sup>. Un mueble alto sin anclar se puede ir encima de un niño.</li>
+    <li>Los tableros de melamina y MDF son para interiores<sup class="f">[6]</sup>.</li>
+  </ul>
+</section>
+
+<section class="capitulo" id="materiales">
+  <h2><span class="num">3</span>Materiales</h2>
+  <p class="entrada">En el curso trabajamos con melamina de 15 mm. Conviene entender qué es y en qué se diferencia de la madera.</p>
+
+  <h3>Los tableros</h3>
+  <table>
+    <thead><tr><th>Tablero</th><th>Qué es</th><th>Para qué sirve en el curso</th></tr></thead>
+    <tbody>
+      <tr><td>Aglomerado (MDP)</td><td>Partículas de madera prensadas con resina.</td><td>Es el alma de casi toda la melamina que se vende en Colombia<sup class="f">[8]</sup>.</td></tr>
+      <tr><td>Melamina</td><td>Aglomerado o MDF recubierto por las dos caras con una lámina decorativa.</td><td>Material del curso: no se pinta, se limpia fácil y viene en muchos colores.</td></tr>
+      <tr><td>MDF</td><td>Fibra de madera prensada, más densa y homogénea.</td><td>Prácticas de corte de la sesión 1: es barato y perdona errores. Se puede pintar.</td></tr>
+      <tr><td>RH</td><td>Versión resistente a la humedad del ambiente (no al agua directa).</td><td>Cocinas, baños y lugares húmedos<sup class="f">[8]</sup>.</td></tr>
+      <tr><td>HDF de 3 mm</td><td>Fibra delgada y dura.</td><td>Fondos de muebles y de cajones.</td></tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li><strong>Espesores:</strong> Madecentro vende melamina en 15, 18 y 36 mm<sup class="f">[8]</sup>. El curso usa 15 mm.</li>
+    <li><strong>Formato del tablero:</strong> la mayoría de la melamina de Madecentro viene en 2150 × 2440 mm<sup class="f">[8]</sup>; el MDF crudo suele venir en 1830 × 2440<sup class="f">[10]</sup>. <em>Confirma el formato con Madecentro antes de calcular cuántos tableros necesitas.</em></li>
+    <li><strong>Usa melamina de dos caras.</strong> Si solo una cara está recubierta, el tablero se puede pandear<sup class="f">[8]</sup>.</li>
+    <li><strong>Almacenamiento:</strong> los tableros se guardan acostados, levantados del piso sobre apoyos a no más de 80 cm entre sí, bajo techo y lejos del sol<sup class="f">[6]</sup>.</li>
+    <li><strong>Agarre del tornillo:</strong> un tornillo agarra más en la cara del tablero que en el canto, y el tablero RH agarra más que el normal<sup class="f">[6]</sup>. Por eso los tornillos al canto se ponen con cuidado y sin apretar de más.</li>
+  </ul>
+
+  <h3>El tapacanto</h3>
+  <p>Es la cinta que cubre los cantos del tablero cortado. Puede ser de PVC, melamina o madera<sup class="f">[5]</sup>. En el curso lo pone Madecentro con máquina al cortar las piezas, así que en la lista de corte hay que decir qué cantos lo llevan. Madecentro maneja canto flexible, semirrígido y rígido en varios anchos<sup class="f">[9]</sup>: pregunta cuál te recomiendan para tu mueble. Como regla, se cubren los cantos que quedan a la vista<sup class="f">[5]</sup>; en lugares húmedos conviene cubrirlos todos, porque el canto desnudo absorbe humedad<sup class="f">[6]</sup>.</p>
+
+  <h3>Y la madera maciza</h3>
+  <p>Si después del curso quieres trabajar madera, ten en cuenta que la madera se mueve: al secarse se contrae mucho a lo ancho y casi nada a lo largo. Por eso las tablas anchas se tuercen y hay que dejarles espacio para moverse. Antes de trabajarla, déjala unos días en el lugar donde la vas a usar para que se aclimate<sup class="f">[38]</sup>.</p>
+  <p>Entre las maderas más comercializadas en Colombia están el sajo, el otobo o cuángare, el sande, el chanul, el flor morado (también llamado roble), el cedro y el caracolí<sup class="f">[37]</sup>. En las ferreterías grandes es común el pino cepillado.</p>
+</section>
+
+<section class="capitulo" id="herramientas">
+  <h2><span class="num">4</span>Herramientas</h2>
+  <p class="entrada">El curso pone las herramientas. Esta lista te sirve para saber qué comprar después, en orden de prioridad.</p>
+
+  <table>
+    <thead><tr><th>Herramienta</th><th>Para qué</th><th>Prioridad</th></tr></thead>
+    <tbody>
+      <tr><td>Taladro atornillador</td><td>Perforar y atornillar. Es la herramienta más usada en melamina.</td><td>1</td></tr>
+      <tr><td>Metro, escuadra y lápiz</td><td>Medir, trazar ángulos rectos y marcar.</td><td>1</td></tr>
+      <tr><td>Prensas de 30 cm o más (mínimo 4)</td><td>Sostener las piezas mientras se perfora y atornilla. Es lo que más ayuda a que todo quede derecho.</td><td>1</td></tr>
+      <tr><td>Gafas, protección auditiva y mascarilla</td><td>Ver el capítulo de seguridad.</td><td>1</td></tr>
+      <tr><td>Juego de brocas (ver tabla siguiente)</td><td>Cada unión pide su broca.</td><td>1</td></tr>
+      <tr><td>Caladora</td><td>Cortes curvos y cortes pequeños.</td><td>2</td></tr>
+      <tr><td>Sierra circular con guía</td><td>Cortes rectos en MDF y madera. La melamina mejor mandarla a cortar.</td><td>3</td></tr>
+      <tr><td>Nivel</td><td>Instalar y nivelar muebles grandes.</td><td>2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Las brocas</h3>
+  <table>
+    <thead><tr><th>Broca</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td>Broca para madera (punta de espuela)</td><td>Se centra sola y deja un agujero limpio<sup class="f">[26]</sup>. La de 3 mm es la perforación guía del tornillo de 4 mm<sup class="f">[1]</sup>.</td></tr>
+      <tr><td>Avellanador</td><td>Hace el cono para que la cabeza del tornillo quede al ras<sup class="f">[26]</sup>.</td></tr>
+      <tr><td>Escalonada para confirmat</td><td>Hace en un solo paso la perforación del tornillo confirmat y el asiento de su cabeza<sup class="f">[18]</sup>.</td></tr>
+      <tr><td>Paleta</td><td>Agujeros grandes, como el del palo de la caja de herramientas. Deja un acabado basto<sup class="f">[26]</sup>.</td></tr>
+      <tr><td>Forstner de 35 mm</td><td>Deja el fondo plano. Es la que se usa para la cazoleta de la bisagra<sup class="f">[3]</sup><sup class="f">[26]</sup>.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Tope de profundidad:</strong> si no tienes tope, enrolla cinta de enmascarar en la broca a la profundidad que necesitas<sup class="f">[27]</sup>.</p>
+</section>
+
+<section class="capitulo" id="cortar">
+  <h2><span class="num">5</span>Medir, trazar y cortar</h2>
+  <p class="entrada">En el curso la melamina la corta Madecentro con máquina. Igual necesitas saber medir, trazar y cortar para las prácticas en MDF y para ajustes en casa.</p>
+
+  <h3>Medir y trazar</h3>
+  <ul>
+    <li><strong>Mide dos veces.</strong> Mide desde el mismo extremo y con el mismo metro durante todo el proyecto.</li>
+    <li><strong>El disco se come material.</strong> Ese ancho se llama <em>kerf</em> y en una sierra circular común es de unos 3 mm. Si no lo cuentas, la pieza sale corta<sup class="f">[29]</sup>.</li>
+    <li><strong>Marca el lado del desperdicio</strong> con una X. El disco va por ese lado de la línea, no encima de ella<sup class="f">[29]</sup>.</li>
+    <li><strong>Comprueba la escuadra midiendo las diagonales.</strong> Si las dos diagonales de un marco o de un cuerpo miden lo mismo, está a escuadra<sup class="f">[30]</sup>.</li>
+  </ul>
+
+  <h3>Sierra circular</h3>
+  <ul>
+    <li>El disco que trae la sierra es para corte basto. Para tableros usa uno de 40 a 60 dientes con puntas de carburo<sup class="f">[25]</sup>; para melamina, de 60 dientes o más<sup class="f">[6]</sup>.</li>
+    <li><strong>La cara buena va hacia abajo</strong>, porque el disco sale por arriba y astilla esa cara<sup class="f">[25]</sup>.</li>
+    <li>Ajusta la profundidad para que los dientes sobresalgan unos 6 mm por debajo de la pieza<sup class="f">[25]</sup>.</li>
+    <li>Para un corte recto, prensa una regla como guía: mide la distancia del disco al borde de la base de la sierra y desplaza la regla esa distancia desde la línea<sup class="f">[25]</sup>.</li>
+    <li>Contra el astillado: cinta de enmascarar sobre la línea, o marcarla varias veces con bisturí<sup class="f">[25]</sup>.</li>
+  </ul>
+
+  <h3>Caladora</h3>
+  <ul>
+    <li>Escoge la hoja según el corte. Por ejemplo, en la línea Bosch la T101B es de corte limpio para piezas de 3 a 30 mm, y la T144D es de corte rápido para piezas de 5 a 50 mm<sup class="f">[28]</sup>.</li>
+    <li>Con hoja normal, la caladora corta al subir: como con la circular, la cara buena va hacia abajo.</li>
+    <li>Una hoja sin filo hace que la sierra se desvíe o se trabe<sup class="f">[22]</sup>.</li>
+  </ul>
+
+  <div class="recuadro">
+    <p><strong>¿Por qué mandamos a cortar la melamina?</strong> La lámina de la melamina se astilla fácil al cortarla con herramientas de mano. Los aserríos usan discos de muchos dientes y una sierra incisora que hace un precorte antes del corte principal<sup class="f">[6]</sup>, y además ponen el tapacanto con máquina.</p>
+  </div>
+</section>
+
+<section class="capitulo" id="uniones">
+  <h2><span class="num">6</span>Uniones</h2>
+  <p class="entrada">Cómo se juntan dos piezas. En el curso usamos tornillo autorroscante para la caja de herramientas y confirmat para los muebles.</p>
+
+  <h3>Tornillo autorroscante</h3>
+  <p>El diámetro del tornillo depende del espesor del tablero, y siempre lleva perforación guía<sup class="f">[1]</sup>:</p>
+  <table>
+    <thead><tr><th class="num">Tablero</th><th>Tornillo</th><th class="num">Perforación guía</th></tr></thead>
+    <tbody>
+      <tr><td class="num">9 mm</td><td>#5 (3 mm)</td><td class="num">2 mm</td></tr>
+      <tr><td class="num">12 mm</td><td>#6 (3,5 mm)</td><td class="num">2,5 mm</td></tr>
+      <tr><td class="num"><strong>15 mm</strong></td><td><strong>#8 (4 mm)</strong></td><td class="num"><strong>3 mm</strong></td></tr>
+      <tr><td class="num">18 mm</td><td>#10 (5 mm)</td><td class="num">4 mm</td></tr>
+    </tbody>
+  </table>
+  <ol class="pasos">
+    <li>Prensa las dos piezas a escuadra.</li>
+    <li>Perfora atravesando la primera pieza y entrando en el canto de la segunda, <strong>centrado en su espesor</strong> y paralelo a sus caras<sup class="f">[1]</sup>.</li>
+    <li>Avellana para que la cabeza quede al ras.</li>
+    <li>Atornilla sin apretar de más: si aprietas demasiado, el tornillo "rueda" y pierde el agarre<sup class="f">[1]</sup>.</li>
+  </ol>
+  <p><strong>Distancias:</strong> el tornillo va como mínimo a 25 mm del borde del tablero y, si se puede, a no menos de 50 mm de las esquinas<sup class="f">[1]</sup><sup class="f">[2]</sup>. Cerca de los extremos el tablero se raja.</p>
+  <p><strong>En MDF</strong> la perforación guía en el canto es obligatoria. Si el MDF se infla al entrar el tornillo, la perforación quedó pequeña<sup class="f">[24]</sup>.</p>
+
+  <h3>Confirmat</h3>
+  <p>Es un tornillo grueso hecho para unir tableros, muy usado en muebles de melamina. En el curso usamos el de 7 × 50. Se perfora con su <strong>broca escalonada</strong>, que hace en un solo paso el agujero para la rosca (5 mm en el caso del 7 × 50) y el asiento de la cabeza<sup class="f">[18]</sup>. No agrandes la perforación ni avellanes de más: el tornillo pierde agarre y la melamina se puede rajar.</p>
+
+  <h3>Minifix y tarugos</h3>
+  <ul>
+    <li><strong>Minifix:</strong> unión que se puede desarmar. Lleva una pieza redonda que se encaja en un agujero de 15 mm hecho con broca especial, y un perno que la jala<sup class="f">[16]</sup>.</li>
+    <li><strong>Tarugos (espigas):</strong> el diámetro va de un tercio a la mitad del espesor de la tabla, y cada agujero se hace un poco más hondo que la mitad del largo del tarugo. Arma en seco antes de pegar<sup class="f">[33]</sup>.</li>
+  </ul>
+
+  <h3>Pegante blanco (PVA)</h3>
+  <p>Para madera y MDF, no para pegar la lámina de la melamina. Como referencia, el Titebond Original da de 4 a 6 minutos para juntar las piezas después de aplicarlo, se prensa de 30 a 60 minutos y la unión no debe cargarse antes de 24 horas<sup class="f">[31]</sup><sup class="f">[32]</sup>. El sobrante se limpia húmedo con un trapo.</p>
+</section>
+
+<section class="capitulo" id="herrajes">
+  <h2><span class="num">7</span>Herrajes y sistema 32</h2>
+
+  <h3>Sistema 32</h3>
+  <p>Es la forma estándar de ubicar las perforaciones en los laterales de un mueble. Las hileras de agujeros van a <strong>37 mm</strong> del canto delantero (y del trasero), los agujeros van cada <strong>32 mm</strong> y tienen <strong>5 mm</strong> de diámetro<sup class="f">[12]</sup><sup class="f">[17]</sup>. Con esa plantilla se ubican entrepaños móviles, bisagras y correderas.</p>
+  <figure>
+    <svg viewBox="-60 -20 520 320" role="img" aria-label="Lateral de un mueble con dos hileras de agujeros a 37 mm de los cantos y cada 32 mm">
+      <rect class="pieza" x="0" y="0" width="400" height="250"/>
+      <g fill="#1f1b16">
+        <circle cx="37" cy="45" r="3"/><circle cx="37" cy="77" r="3"/><circle cx="37" cy="109" r="3"/><circle cx="37" cy="141" r="3"/><circle cx="37" cy="173" r="3"/><circle cx="37" cy="205" r="3"/>
+        <circle cx="363" cy="45" r="3"/><circle cx="363" cy="77" r="3"/><circle cx="363" cy="109" r="3"/><circle cx="363" cy="141" r="3"/><circle cx="363" cy="173" r="3"/><circle cx="363" cy="205" r="3"/>
+      </g>
+      <path class="cota" d="M0 262 V272 M37 262 V272 M0 268 H37"/>
+      <text class="cota-t" x="18" y="290" text-anchor="middle">37</text>
+      <path class="cota" d="M363 262 V272 M400 262 V272 M363 268 H400"/>
+      <text class="cota-t" x="382" y="290" text-anchor="middle">37</text>
+      <path class="cota" d="M-12 45 H-22 M-12 77 H-22 M-17 45 V77"/>
+      <text class="cota-t" x="-24" y="65" text-anchor="end">32</text>
+      <text x="200" y="-6" text-anchor="middle">canto delantero ← lateral del mueble (vista interior) → canto trasero</text>
+      <text x="200" y="130" text-anchor="middle">agujeros de Ø 5 mm</text>
+    </svg>
+    <figcaption>Lateral visto por dentro. Medidas en mm, sin escala.</figcaption>
+  </figure>
+
+  <h3>Bisagra de cazoleta</h3>
+  <ul>
+    <li>La cazoleta de <strong>35 mm</strong> es para puertas de 15 mm o más<sup class="f">[3]</sup>. Se perfora con broca Forstner de 35 mm y con tope, porque es fácil atravesar la puerta. La profundidad depende del modelo: por ejemplo, 13 mm en una Blum CLIP top y 11 mm en una Blum COMPACT<sup class="f">[14]</sup><sup class="f">[15]</sup>. <em>Mira la ficha de la bisagra que compraste.</em></li>
+    <li>Del borde de la puerta al borde del agujero se dejan de 3 a 5 mm, así que el centro de la cazoleta queda a unos 21 a 22 mm del borde<sup class="f">[3]</sup>.</li>
+    <li>Las bisagras van a 7,5 a 10 cm de los extremos de la puerta<sup class="f">[3]</sup>.</li>
+    <li>Según cómo queda la puerta: <strong>recta</strong> (la puerta tapa el costado), <strong>codo</strong> (dos puertas comparten un divisor) y <strong>supercodo</strong> (la puerta queda metida entre los costados)<sup class="f">[3]</sup>.</li>
+    <li>Después de instalada, la bisagra se regula con sus tornillos en altura, profundidad y hacia los lados<sup class="f">[3]</sup>.</li>
+  </ul>
+  <div class="dos-columnas">
+    <figure>
+      <svg viewBox="-10 -10 240 205" role="img" aria-label="Esquina de una puerta con la cazoleta de 35 mm cuyo centro está a unos 22 mm del borde">
+        <rect class="pieza" x="0" y="0" width="210" height="180"/>
+        <circle cx="22" cy="90" r="17.5" class="oscura"/>
+        <circle cx="22" cy="90" r="1.5" fill="#1f1b16"/>
+        <path class="cota" d="M0 140 H22 M0 134 V146 M22 134 V146"/>
+        <text class="cota-t" x="11" y="160" text-anchor="middle">≈ 22</text>
+        <path class="cota" d="M4.5 60 H39.5 M4.5 54 V66 M39.5 54 V66"/>
+        <text class="cota-t" x="22" y="48" text-anchor="middle">Ø 35</text>
+        <text x="70" y="88">cara interior</text><text x="70" y="102">de la puerta</text>
+        <text x="4" y="176" font-size="9">← borde de la puerta</text>
+      </svg>
+      <figcaption>Ubicación de la cazoleta. Medidas en mm, sin escala.</figcaption>
+    </figure>
+    <div>
+      <p><strong>Cuántas bisagras</strong> (cazoleta de 35 mm, puertas de hasta 600 mm de ancho)<sup class="f">[3]</sup>:</p>
+      <table>
+        <thead><tr><th>Alto de la puerta</th><th class="num">Bisagras</th></tr></thead>
+        <tbody>
+          <tr><td>hasta 0,9 m</td><td class="num">2</td></tr>
+          <tr><td>hasta 1,6 m</td><td class="num">3</td></tr>
+          <tr><td>hasta 2,0 m</td><td class="num">4</td></tr>
+          <tr><td>hasta 2,4 m</td><td class="num">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Correderas telescópicas</h3>
+  <ul>
+    <li>Entre el costado del cajón y el costado del mueble se deja una holgura de <strong>12,5 a 13 mm por lado</strong><sup class="f">[4]</sup><sup class="f">[11]</sup>. Algunas marcas piden 12,7 mm<sup class="f">[13]</sup>: <em>confírmalo con la ficha de la corredera que compres</em> y ajusta la calculadora.</li>
+    <li>El riel se monta a unos 2 mm del borde frontal del costado del mueble<sup class="f">[4]</sup>.</li>
+    <li>El fondo interior del mueble debe ser al menos el largo de la corredera más unos 4 mm<sup class="f">[13]</sup>.</li>
+    <li>Monta las dos correderas a la misma altura: mide desde la base en los dos lados.</li>
+  </ul>
+</section>
+
+<section class="capitulo" id="holguras">
+  <h2><span class="num">8</span>Holguras</h2>
+  <p class="entrada">La holgura es el espacio que se deja para que una pieza abra, corra o entre sin rozar. Estos son los valores que usa la calculadora del curso.</p>
+  <table><thead><tr><th>Dónde</th><th class='num'>mm</th><th>Cómo se usa</th></tr></thead><tbody><tr><td>Frente sobrepuesto, a cada lado</td><td class='num'>2</td><td>La puerta o el frente queda 2 × esta medida más angosto que el mueble.</td></tr>
+<tr><td>Entre frentes</td><td class='num'>3</td><td>Entre dos cajones, y entre el cajón y la puerta.</td></tr>
+<tr><td>Entre las dos hojas de una puerta doble</td><td class='num'>3</td><td></td></tr>
+<tr><td>Arriba del frente más alto</td><td class='num'>1</td><td></td></tr>
+<tr><td>Abajo del frente más bajo</td><td class='num'>1</td><td></td></tr>
+<tr><td>Corredera telescópica, a cada lado</td><td class='num'>13</td><td>Caja del cajón = ancho interior − 2 × esta medida. Confirmar con la ficha de la corredera.</td></tr>
+<tr><td>Fondo de HDF, a cada lado</td><td class='num'>2</td><td>El fondo queda 2 × esta medida más pequeño que el mueble.</td></tr>
+<tr><td>Pieza embutida, a cada lado</td><td class='num'>1</td><td>Entrepaños móviles y piezas que entran entre los laterales sin ir fijas.</td></tr></tbody></table>
+  <p class="pie-tabla">Las holguras entre frentes son una práctica del oficio, no una norma: la bisagra permite corregir unos milímetros. La de la corredera sí depende del fabricante.</p>
+</section>
+
+<section class="capitulo" id="despiece">
+  <h2><span class="num">9</span>Despiece y pedido a Madecentro</h2>
+  <p class="entrada">El despiece es la lista de todas las piezas del mueble con sus medidas. De que esté bien depende todo lo demás.</p>
+
+  <h3>La regla del espesor</h3>
+  <p>Si los laterales van completos de arriba abajo, la base, el techo y los entrepaños van <em>entre</em> ellos. Entonces miden el ancho total menos dos espesores:</p>
+  <p class="formula">ancho interior = ancho exterior − 2 × e</p>
+  <figure class="pequena">
+    <svg viewBox="-60 -34 420 300" role="img" aria-label="Frente de un mueble: dos laterales de alto completo y la base y el techo entre ellos, que miden el ancho menos dos espesores">
+      <rect class="oscura" x="0" y="0" width="15" height="220"/>
+      <rect class="oscura" x="285" y="0" width="15" height="220"/>
+      <rect class="pieza" x="15" y="0" width="270" height="15"/>
+      <rect class="pieza" x="15" y="205" width="270" height="15"/>
+      <rect class="pieza" x="15" y="110" width="270" height="15"/>
+      <path class="cota" d="M0 -18 H300 M0 -24 V-12 M300 -24 V-12"/>
+      <text class="cota-t" x="150" y="-22" text-anchor="middle">ancho exterior</text>
+      <path class="cota" d="M15 238 H285 M15 232 V244 M285 232 V244"/>
+      <text class="cota-t" x="150" y="256" text-anchor="middle">ancho − 2e (base, techo y entrepaño)</text>
+      <text x="-6" y="110" text-anchor="end">lateral</text>
+      <text x="150" y="104" text-anchor="middle">entrepaño</text>
+    </svg>
+    <figcaption>Frente del mueble sin puertas. Con e = 15 mm, un mueble de 500 mm lleva base y techo de 470 mm.</figcaption>
+  </figure>
+  <div class="recuadro">
+    <p><strong>El error que más cuesta:</strong> pedir la base o el techo con el ancho exterior, sin descontar los espesores. Las piezas llegan 30 mm más largas y no entran. Por eso en el curso cada lista se revisa en pareja antes de enviarla.</p>
+  </div>
+
+  <h3>Cómo leer la lista de corte</h3>
+  <ul>
+    <li><strong>Largo y ancho</strong> de cada pieza, en mm, y la cantidad.</li>
+    <li><strong>Tapacanto:</strong> L1 y L2 son los dos cantos largos; A1 y A2 son los dos cantos anchos (cortos). Se marca cuáles llevan cinta.</li>
+    <li><strong>Veta:</strong> si la melamina tiene dibujo de madera, la dirección del largo importa. En colores lisos no.</li>
+  </ul>
+
+  <h3>Del diseño al pedido</h3>
+  <ol class="pasos">
+    <li>Mide el espacio donde va el mueble y define las medidas exteriores.</li>
+    <li>Saca el despiece con la calculadora del curso (o a mano con la regla del espesor) y revísalo en pareja.</li>
+    <li>Marca los cantos con tapacanto.</li>
+    <li>Genera la hoja de pedido: trae el área de cada material y los metros de tapacanto, que sirven para pedir la cotización.</li>
+    <li>Confirma el pedido con Madecentro y compra los herrajes mientras cortan.</li>
+  </ol>
+</section>
+
+<section class="capitulo" id="caja">
+  <h2><span class="num">10</span>Proyecto express: caja de herramientas</h2>
+  <p class="entrada">Una caja abierta con un palo de madera como manija. Las piezas llegan cortadas y con tapacanto; en el taller se marca, se perfora y se ensambla.</p>
+
+  <figure class="ancha">
+    <svg viewBox="-50 -30 780 340" role="img" aria-label="Caja de herramientas vista de lado y de frente con sus medidas principales">
+      <g>
+        <rect class="pieza" x="0" y="235" width="450" height="15"/>
+        <rect class="oscura" x="0" y="0" width="15" height="235"/>
+        <rect class="oscura" x="435" y="0" width="15" height="235"/>
+        <rect class="pieza" x="15" y="130" width="420" height="105"/>
+        <rect class="pieza" x="15" y="22.5" width="420" height="25"/>
+        <rect class="oculta" x="0" y="22.5" width="15" height="25"/>
+        <rect class="oculta" x="435" y="22.5" width="15" height="25"/>
+        <path class="cota" d="M0 268 H450 M0 262 V274 M450 262 V274"/>
+        <text class="cota-t" x="225" y="290" text-anchor="middle">450</text>
+        <path class="cota" d="M-14 0 V250 M-20 0 H-8 M-20 250 H-8"/>
+        <text class="cota-t" x="-18" y="125" text-anchor="end">250</text>
+        <path class="cota" d="M462 130 V250 M456 130 H468 M456 250 H468"/>
+        <text class="cota-t" x="472" y="194">120</text>
+        <text x="225" y="40" text-anchor="middle">palo de 22–25 mm</text>
+        <text x="225" y="187" text-anchor="middle">costado</text>
+        <text x="225" y="-10" text-anchor="middle">Vista de lado</text>
+      </g>
+      <g transform="translate(520 0)">
+        <rect class="pieza" x="0" y="235" width="200" height="15"/>
+        <rect class="oscura" x="0" y="0" width="200" height="235"/>
+        <circle cx="100" cy="35" r="12.5" fill="#fffdf9" stroke="#1f1b16"/>
+        <path class="cota" d="M150 0 V35 M144 0 H156 M144 35 H156"/>
+        <text class="cota-t" x="160" y="22">35</text>
+        <path class="cota" d="M0 268 H200 M0 262 V274 M200 262 V274"/>
+        <text class="cota-t" x="100" y="290" text-anchor="middle">200</text>
+        <text x="100" y="140" text-anchor="middle">cabecera</text>
+        <text x="100" y="-10" text-anchor="middle">Vista de frente</text>
+      </g>
+    </svg>
+    <figcaption>Medidas exteriores en mm. El centro del agujero del palo va en la mitad del ancho de la cabecera y a 35 mm de su borde superior.</figcaption>
+  </figure>
+
+  <h3>Lista de corte</h3>
+  <table><thead><tr><th>Pieza</th><th class='num'>Cant.</th><th class='num'>Largo</th><th class='num'>Ancho</th><th>Material</th><th>Tapacanto</th><th>Notas</th></tr></thead><tbody><tr><td>Base</td><td class='num'>1</td><td class='num'>450</td><td class='num'>200</td><td>Ristretto RH 15</td><td>L1 L2 A1 A2</td><td></td></tr>
+<tr><td>Cabecera</td><td class='num'>2</td><td class='num'>235</td><td class='num'>200</td><td>Ristretto RH 15</td><td>L1 L2 A1</td><td>perforación para el palo: centrada y a 35 mm del borde superior (se hace en el taller)</td></tr>
+<tr><td>Costado</td><td class='num'>2</td><td class='num'>420</td><td class='num'>105</td><td>Ristretto RH 15</td><td>L1</td><td></td></tr></tbody></table><p class='pie-tabla'>Medidas en mm. Ristretto RH 15 mm: 0.27 m² · Tapacanto: 3.48 m.</p>
+
+  <div class="dos-columnas">
+    <div>
+      <h3>Materiales</h3>
+      <ul class="check">
+        <li>Las 5 piezas cortadas</li>
+        <li>Palo de madera de 22–25 mm × 450 mm (un palo de escoba sirve)</li>
+        <li>20 tornillos autorroscantes 4 × 40 y algunos de repuesto</li>
+        <li>Tapitas adhesivas del color de la melamina</li>
+        <li>Cinta de enmascarar</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Herramientas</h3>
+      <ul class="check">
+        <li>Taladro atornillador</li>
+        <li>Broca de 3 mm y avellanador</li>
+        <li>Broca de paleta del diámetro del palo</li>
+        <li>2 prensas y escuadra</li>
+        <li>Metro y lápiz</li>
+        <li>Gafas de seguridad</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Paso a paso</h3>
+  <ol class="pasos">
+    <li><strong>Revisa las piezas</strong> contra la lista de corte y marca con lápiz la cara buena de cada una.</li>
+    <li><strong>Marca el agujero del palo</strong> en las dos cabeceras: en la mitad del ancho (100 mm) y a 35 mm del borde superior. Pon las dos cabeceras juntas para comprobar que las marcas coinciden.</li>
+    <li><strong>Perfora el agujero del palo.</strong> Pon cinta de enmascarar en las dos caras para que la melamina no se astille. Perfora con la broca de paleta hasta que asome la punta por el otro lado, voltea la pieza y termina desde ese lado.</li>
+    <li><strong>Arma el marco.</strong> Prensa una cabecera contra el extremo de un costado, a escuadra. Perfora desde la cara de afuera de la cabecera con broca de 3 mm, centrado en el espesor del costado (a 7,5 mm del borde de la cabecera), a 25 mm de arriba y de abajo del costado. Avellana y atornilla. Repite en las 4 esquinas: son 8 tornillos.</li>
+    <li><strong>Revisa la escuadra</strong> midiendo las dos diagonales del marco. Si no coinciden, empuja suavemente la esquina larga hasta que coincidan.</li>
+    <li><strong>Pon la base.</strong> Apoya el marco sobre la base, con los bordes al ras. Atornilla desde abajo: 3 tornillos en cada costado y 2 en cada cabecera, centrados en el espesor de cada pieza (a 7,5 mm del borde de la base). Son 10 tornillos. La base deja la caja a escuadra.</li>
+    <li><strong>Pon el palo.</strong> Pásalo por los dos agujeros. Fíjalo con un tornillo desde el canto superior de cada cabecera, en el centro, con perforación guía.</li>
+    <li><strong>Termina.</strong> Tapa las cabezas de tornillo que quedan a la vista con tapitas adhesivas, limpia las marcas de lápiz y escribe tu nombre por debajo.</li>
+  </ol>
+  <p class="pie-tabla">Diseño basado en la caja de herramientas abierta clásica de madera<sup class="f">[39]</sup><sup class="f">[40]</sup>, adaptada a melamina de 15 mm cortada en Madecentro: las cabeceras quedan rectangulares para que no haga falta sierra.</p>
+</section>
+
+<section class="capitulo" id="nochero">
+  <h2><span class="num">11</span>Proyecto de referencia: el nochero</h2>
+  <p class="entrada">Un nochero de 500 × 400 × 550 mm con una puerta y un cajón. Es la opción más pequeña del curso completo y tiene todo lo que lleva un closet: cuerpo, entrepaño, fondo, puerta con bisagra y cajón con corredera.</p>
+
+  <h3>Lista de corte</h3>
+  <table><thead><tr><th>Pieza</th><th class='num'>Cant.</th><th class='num'>Largo</th><th class='num'>Ancho</th><th>Material</th><th>Tapacanto</th><th>Notas</th></tr></thead><tbody><tr><td>Lateral</td><td class='num'>2</td><td class='num'>550</td><td class='num'>400</td><td>Ristretto RH 15</td><td>L1</td><td></td></tr>
+<tr><td>Base y techo</td><td class='num'>2</td><td class='num'>470</td><td class='num'>400</td><td>Ristretto RH 15</td><td>L1</td><td></td></tr>
+<tr><td>Entrepaño fijo</td><td class='num'>1</td><td class='num'>470</td><td class='num'>400</td><td>Ristretto RH 15</td><td>L1</td><td>cara superior a 405</td></tr>
+<tr><td>Fondo</td><td class='num'>1</td><td class='num'>546</td><td class='num'>496</td><td>HDF 3</td><td>—</td><td></td></tr>
+<tr><td>Puerta</td><td class='num'>1</td><td class='num'>496</td><td class='num'>395</td><td>Ristretto RH 15</td><td>L1 L2 A1 A2</td><td></td></tr>
+<tr><td>Frente de cajón</td><td class='num'>1</td><td class='num'>496</td><td class='num'>150</td><td>Ristretto RH 15</td><td>L1 L2 A1 A2</td><td></td></tr>
+<tr><td>Costado de cajón</td><td class='num'>2</td><td class='num'>350</td><td class='num'>110</td><td>Ristretto RH 15</td><td>L1</td><td></td></tr>
+<tr><td>Frente interior y trasera de cajón</td><td class='num'>2</td><td class='num'>414</td><td class='num'>110</td><td>Ristretto RH 15</td><td>L1</td><td></td></tr>
+<tr><td>Fondo de cajón</td><td class='num'>1</td><td class='num'>444</td><td class='num'>350</td><td>HDF 3</td><td>—</td><td></td></tr></tbody></table><p class='pie-tabla'>Medidas en mm. Ristretto RH 15 mm: 1.44 m² · HDF 3 mm: 0.43 m² · Tapacanto: 7.11 m.</p>
+
+  <h3>Herrajes</h3>
+  <ul class="check">
+    <li>2 bisagras de cazoleta de 35 mm, rectas (la puerta mide menos de 0,9 m)</li>
+    <li>1 par de correderas telescópicas de 350 mm</li>
+    <li>Tornillos confirmat 7 × 50 para el cuerpo y el cajón</li>
+    <li>Tornillos cortos o puntillas para los fondos de HDF</li>
+    <li>2 jaladeras</li>
+    <li>Patas o niveladores (opcional)</li>
+  </ul>
+
+  <h3>Orden de armado</h3>
+  <ol class="pasos">
+    <li><strong>Cuerpo:</strong> un lateral con la base, luego el techo, luego el otro lateral. Se arma en el piso, con prensas y escuadras.</li>
+    <li><strong>Entrepaño fijo:</strong> su cara superior queda a 405 mm de la base. Separa la zona del cajón de la de la puerta.</li>
+    <li><strong>Fondo:</strong> mide las diagonales hasta que coincidan y fija el fondo de HDF. El fondo es lo que mantiene el mueble a escuadra.</li>
+    <li><strong>Puerta:</strong> perfora las cazoletas, monta las bisagras y regula la puerta hasta que la luz con el cuerpo quede pareja.</li>
+    <li><strong>Cajón:</strong> arma la caja, monta las correderas a la misma altura en los dos lados y ajusta el frente.</li>
+    <li><strong>Acabados:</strong> jaladeras, patas, limpieza y retoques.</li>
+  </ol>
+</section>
+
+<section class="capitulo" id="tu-proyecto">
+  <h2><span class="num">12</span>Tu proyecto</h2>
+  <p class="entrada">En el curso completo escoges un proyecto para tu casa: un closet, un nochero o un mueble para la sala, el comedor, la cocina, la habitación o el baño. En el curso armas el primer módulo; el resto lo terminas en casa.</p>
+
+  <h3>Lo que voy a hacer</h3>
+  <div class="lineas"></div><div class="lineas"></div>
+  <h3>Medidas del espacio (alto × ancho × fondo)</h3>
+  <div class="lineas"></div>
+  <h3>Croquis</h3>
+  <div class="cuadricula"></div>
+  <p class="pie-tabla">Cada cuadro mide 5 mm. Dibuja el mueble de frente y escribe las medidas exteriores.</p>
+</section>
+
+<section class="capitulo">
+  <h3>Despiece de mi primer módulo</h3>
+  <table class="vacia">
+    <thead><tr><th>Pieza</th><th class="num">Cant.</th><th class="num">Largo</th><th class="num">Ancho</th><th>Tapacanto (L1 L2 A1 A2)</th><th>Notas</th></tr></thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <h3>Módulos que me faltan para terminar en casa</h3>
+  <table class="vacia">
+    <thead><tr><th>Módulo</th><th>Medidas</th><th>Herrajes por comprar</th><th>Listo</th></tr></thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td>☐</td></tr>
+      <tr><td></td><td></td><td></td><td>☐</td></tr>
+      <tr><td></td><td></td><td></td><td>☐</td></tr>
+      <tr><td></td><td></td><td></td><td>☐</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="capitulo" id="acabados">
+  <h2><span class="num">13</span>Lijado y acabados</h2>
+
+  <h3>En melamina</h3>
+  <p>La melamina no se lija ni se pinta: ya viene terminada. El acabado es limpiar las marcas de lápiz y el polvo, tapar las cabezas de tornillo con tapitas del color, y retocar el tapacanto donde haya quedado una rebaba (se quita con lima o formón, sin tocar la lámina)<sup class="f">[5]</sup>.</p>
+
+  <h3>En madera y MDF</h3>
+  <ul>
+    <li><strong>Secuencia de lija:</strong> empieza con 80, sigue con 120 y luego con 150 o 180. No te saltes más de un grano, lija siempre a favor de la veta y limpia el polvo entre granos<sup class="f">[34]</sup>.</li>
+    <li>Para pintar basta llegar a 150; para tinte, hasta 180–220; para acabado transparente, 220 o más fino<sup class="f">[34]</sup>.</li>
+    <li><strong>Sellador:</strong> como ejemplo de un producto que se consigue en Colombia, el sellador profesional 8083 de Pinturas Corona se diluye con thinner, seca al tacto en minutos y se lija entre manos; lleva mínimo 2 manos y es inflamable<sup class="f">[35]</sup>. Sigue siempre la ficha del producto que uses.</li>
+    <li><strong>MDF para pintar:</strong> la primera mano debe ser con base solvente, porque el agua levanta las fibras. Los cantos se rellenan con masilla y se lijan fino<sup class="f">[23]</sup>.</li>
+  </ul>
+</section>
+
+<section class="capitulo" id="cuidado">
+  <h2><span class="num">14</span>Cuidado de herramientas y del taller</h2>
+  <ul>
+    <li>Mantén las herramientas limpias y con filo. Una herramienta dañada se retira y se marca "no usar"<sup class="f">[20]</sup>.</li>
+    <li>Un disco que corta lento, astilla más o quema la madera puede estar sucio de resina o sin filo.</li>
+    <li>Guarda las brocas por tipo y por diámetro: en melamina, la broca equivocada se nota.</li>
+    <li>Barre el polvo al terminar y aspira en vez de soplar.</li>
+    <li>Guarda los tableros acostados y levantados del piso<sup class="f">[6]</sup>.</li>
+  </ul>
+
+  <h2 style="margin-top:28px"><span class="num">15</span>Glosario</h2>
+  <table>
+    <tbody>
+      <tr><td><strong>Avellanar</strong></td><td>Hacer un cono en la boca del agujero para que la cabeza del tornillo quede al ras.</td></tr>
+      <tr><td><strong>Cazoleta</strong></td><td>La parte redonda de la bisagra que va metida en la puerta.</td></tr>
+      <tr><td><strong>Confirmat</strong></td><td>Tornillo grueso para unir tableros, con broca escalonada propia.</td></tr>
+      <tr><td><strong>Corredera</strong></td><td>Riel que permite abrir y cerrar un cajón.</td></tr>
+      <tr><td><strong>Despiece</strong></td><td>Lista de todas las piezas de un mueble con sus medidas.</td></tr>
+      <tr><td><strong>e</strong></td><td>Espesor del tablero.</td></tr>
+      <tr><td><strong>Entrepaño</strong></td><td>Tabla horizontal dentro del mueble.</td></tr>
+      <tr><td><strong>Holgura</strong></td><td>Espacio que se deja para que una pieza abra, corra o entre sin rozar.</td></tr>
+      <tr><td><strong>Jaladera</strong></td><td>Manija de puertas y cajones.</td></tr>
+      <tr><td><strong>Kerf</strong></td><td>Ancho del corte que se come el disco.</td></tr>
+      <tr><td><strong>Lateral</strong></td><td>Cada uno de los lados verticales de un mueble.</td></tr>
+      <tr><td><strong>MDP</strong></td><td>Tablero de partículas o aglomerado.</td></tr>
+      <tr><td><strong>Nochero</strong></td><td>Mesa de noche.</td></tr>
+      <tr><td><strong>Perforación guía</strong></td><td>Agujero más delgado que el tornillo, para que entre derecho y no raje el tablero.</td></tr>
+      <tr><td><strong>RH</strong></td><td>Tablero resistente a la humedad del ambiente.</td></tr>
+      <tr><td><strong>Sistema 32</strong></td><td>Plantilla estándar de agujeros cada 32 mm para ubicar herrajes.</td></tr>
+      <tr><td><strong>Tapacanto</strong></td><td>Cinta que cubre los cantos del tablero.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="capitulo" id="aprender">
+  <h2><span class="num">16</span>Para seguir aprendiendo</h2>
+  <p class="entrada">Recursos revisados en octubre de 2026. Los marcados como gratis los publica su propio autor o fabricante.</p>
+
+  <h3>Libros</h3>
+  <table>
+    <thead><tr><th>Libro</th><th>Idioma</th><th>Para qué te sirve</th></tr></thead>
+    <tbody>
+      <tr><td><em>Guía completa de carpintería</em>, Chris Tribe (Promopress, 2019)</td><td>ES</td><td>Para empezar: maderas, técnicas y práctica, con fotos de cada procedimiento.</td></tr>
+      <tr><td><em>Trabajos en madera</em>, colección Artes y Oficios (Parramón)</td><td>ES</td><td>Manual de taller con muchas fotos a color.</td></tr>
+      <tr><td><em>Manual completo de la madera, la carpintería y la ebanistería</em>, Albert Jackson y David Day</td><td>ES</td><td>El clásico ilustrado de consulta: maderas, herramientas, uniones y acabados. Se consigue sobre todo de segunda mano.</td></tr>
+      <tr><td><em>Woodworking Basics</em>, Peter Korn (Taunton, 2003)</td><td>EN</td><td>Un curso completo paso a paso, con 5 proyectos.</td></tr>
+      <tr><td><em>Understanding Wood Finishing</em>, Bob Flexner (Fox Chapel, 3.ª ed., 2021)</td><td>EN</td><td>La referencia en acabados y en cómo resolver problemas.</td></tr>
+      <tr><td><em>The Anarchist's Tool Chest</em>, Christopher Schwarz (Lost Art Press)</td><td>EN</td><td>Qué herramientas comprar y por qué. <strong>Gratis</strong> en PDF en el sitio de la editorial: lostartpress.com</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Guías gratuitas</h3>
+  <ul>
+    <li><strong>Arauco, Serie Cómo Hacer (Colombia):</strong> 52 fichas con proyectos completos (escritorio, estantería, mueble de TV) y técnicas (correderas, bisagras, tapacanto, tornillos). Varias se usaron en esta guía. arauco.com/colombia/ayuda-para-tus-proyectos/serie-como-hacer</li>
+    <li><strong>CITEmadera (Perú), muebles con tableros de melamina:</strong> dos manuales en PDF, uno de materiales, herrajes y seguridad, y otro de diseño y despiece. Se encuentran en gob.pe buscando "Elementos para la fabricación de muebles con tableros de melamina".</li>
+    <li><strong>Hettich Colombia, descargas:</strong> catálogos y videos de montaje de bisagras y correderas. hettich.com/es-co/servicios/descargas</li>
+    <li><strong>Blum, servicios:</strong> videos, hojas técnicas y la app EASY ASSEMBLY para montar y ajustar herrajes. blum.com</li>
+  </ul>
+
+  <h3>Planos gratuitos</h3>
+  <ul>
+    <li><strong>Homecenter Colombia:</strong> guías en melamina de 15 mm con lista de materiales: repisa para juguetes, mueble esquinero, oficina pequeña, mueble para TV y clóset. homecenter.com.co (sección "Aprende cómo hacer")</li>
+    <li><strong>Ana White:</strong> planos en madera con lista de cortes, entre ellos una caja de herramientas y zapateros. ana-white.com</li>
+    <li><strong>Woodsmith:</strong> planos gratis de proyectos en madera. woodsmithplans.com/free-plans</li>
+  </ul>
+
+  <h3>Programas para diseñar y despiezar</h3>
+  <table>
+    <thead><tr><th>Programa</th><th>Costo</th><th>Para qué</th></tr></thead>
+    <tbody>
+      <tr><td>SketchUp Free</td><td>Gratis, en el navegador</td><td>Dibujar el mueble en 3D antes de pedirlo.</td></tr>
+      <tr><td>CutList Optimizer</td><td>Gratis con límites</td><td>Acomodar las piezas en el tablero para desperdiciar menos.</td></tr>
+      <tr><td>OPTIMIK</td><td>Gratis hasta 30 piezas (Windows)</td><td>Plano de cortes del tablero.</td></tr>
+      <tr><td>Calculadora CarpinterIA</td><td>Gratis, código abierto</td><td>La del curso: despiece, hoja de pedido y holguras. github.com/serandmoncas/CarpinterIA</td></tr>
+    </tbody>
+  </table>
+  <p class="pie-tabla">En los optimizadores, cambia el tamaño del tablero al formato que te confirme Madecentro.</p>
+
+  <h3>Videos</h3>
+  <ul>
+    <li><strong>En español:</strong> Domingo Freire y DFI Creativo (muebles y closets en melamina), Konex 3D (diseño en SketchUp y despiece), Maggy Azcagorta (bisagras de cazoleta para principiantes) y Homecenter Colombia.</li>
+    <li><strong>En inglés:</strong> Steve Ramsey, <em>Woodworking for Mere Mortals</em> (para empezar con pocas herramientas), The Wood Whisperer y Stumpy Nubs (técnica y seguridad).</li>
+  </ul>
+</section>
+
+<section class="capitulo" id="fuentes">
+  <h2><span class="num">17</span>Fuentes</h2>
+  <p class="pie-tabla">Consultadas en octubre de 2026. Los datos de fabricantes cambian: ante la duda, manda la ficha del producto que compres.</p>
+  <ol class="fuentes">
+    <li>Arauco. Cómo unir tableros con tornillos autorroscantes. https://arauco.com/chile/wp-content/uploads/sites/14/2019/03/12_15955_foll_web_muebleria_unir-autorroscante_chile_28_sep_2015_963.pdf</li>
+    <li>Arauco. Cómo unir tableros con tornillos soberbios. https://arauco.com/chile/wp-content/uploads/sites/14/2019/03/03_15955_foll_web_muebleria_unir_tableros_chile_28_sep_2015_1053.pdf</li>
+    <li>Arauco. Cómo instalar bisagras. https://arauco.com/chile/wp-content/uploads/sites/14/2019/03/05_15955_foll_web_muebleria_bisagras_chile_28_sep_2015_1033.pdf</li>
+    <li>Arauco. Cómo instalar correderas. https://arauco.com/chile/wp-content/uploads/sites/14/2019/03/09_pap_correderas_chile_30jul_2015_992.pdf</li>
+    <li>Arauco Colombia. Cómo colocar tapacantos. https://arauco.com/colombia/wp-content/uploads/sites/18/2020/10/04_15955_foll_web_muebleria_tapacantos_arco_02_sep_15_1713.pdf</li>
+    <li>Arauco Colombia. Ficha técnica Melamina VESTO 2022. https://arauco-qas.arauco.com/colombia/wp-content/uploads/sites/18/2022/05/5426_COLOMBIA_FICHA_TECNICA_MELAMINA_VESTO_2022.pdf</li>
+    <li>Arauco Colombia. Serie Cómo Hacer: Home Office. https://arauco.com/colombia/wp-content/uploads/sites/18/2020/10/3-home-office-serie-como-hacer-hc-pdf_501_so1.pdf</li>
+    <li>Madecentro. Tableros de melamina. https://madecentro.com/collections/tableros-de-melamina</li>
+    <li>Madecentro. Cantos. https://madecentro.com/collections/cantos</li>
+    <li>Homecenter Colombia. Tablero MDF 15 mm 1,83 × 2,44 m Trupan. https://www.homecenter.com.co/homecenter-co/product/884232/tablero-mdf-15mm-183x244m-trupan/884232/</li>
+    <li>Homecenter Colombia. Cómo instalar correderas paso a paso. https://www.homecenter.com.co/homecenter-co/guias-de-compra/aprenda-como-instalar-correderas-paso-a-paso</li>
+    <li>Hettich. Plantilla de perforación System 32. https://web2.hettich.com/hbh/addon/montage/010224_03_14.pdf</li>
+    <li>Hettich. KA Slides Brochure. https://web.hettich.com/fileadmin/Company_website/HUS/Media/HUS_KA_Slides_Brochure_0422_update.pdf</li>
+    <li>Blum. Instructivo H002 CLIP top BLUMOTION 110°. https://d2.blum.com/services/BEC003/cme198264_ma_dok_bus_$sen-us_$aof_$v1.pdf</li>
+    <li>Blum. Instructivo H004 COMPACT BLUMOTION. https://d2.blum.com/services/BEC003/cme198265_ma_dok_bus_$sen-us_$aof_$v1.pdf</li>
+    <li>Häfele. Plantilla de perforación Minifix. https://files.hafele.co.uk/CatalogFiles/www/23C3-38.pdf</li>
+    <li>Häfele. Plantilla de hileras System 32. https://files.hafele.co.uk/CatalogFiles/www/23C3-42.pdf</li>
+    <li>SPAX / Hranipex. Broca Confirmate 7,0 × 50. https://hranipex.com/es/producto/spax-confirmate-drill-7-0x50-fwf004427</li>
+    <li>HSE (Reino Unido). Cutting and sanding wood. https://www.hse.gov.uk/construction/healthrisks/hazardous-substances/cutting-and-sanding-wood.htm</li>
+    <li>OSHA Office of Training and Education. Tools – Hand and Power (copia UGA). https://fmd.uga.edu/wp-content/uploads/hand_and_power_tool_safety_osha_uga_fmd_2018.pdf</li>
+    <li>OSHAcademy. Curso 810, herramientas manuales y eléctricas. https://www.oshacademy.com/courses/training/810-hand-power-tool-safety/810-4-5.php</li>
+    <li>Black &amp; Decker. Manual PHS550B (reglas generales de seguridad). https://images.toolsid.com/black-and-decker/items/pdf/phs550b-manual.pdf</li>
+    <li>Fine Woodworking. Building with MDF. https://www.finewoodworking.com/2017/10/05/building-with-mdf</li>
+    <li>Woodworker's Journal. Tips for screwing MDF. https://www.woodworkersjournal.com/tips-screwing-mdf/</li>
+    <li>Bob Vila. Cutting plywood. https://www.bobvila.com/articles/cutting-plywood/</li>
+    <li>Bob Vila. Drill bits for different jobs. https://www.bobvila.com/articles/480-drill-bits-for-different-jobs/</li>
+    <li>This Old House. Drilling pilot holes. https://www.thisoldhouse.com/woodworking/drilling-pilot-holes</li>
+    <li>Bosch Professional. Juego de hojas de caladora para madera. https://www.bosch-professional.com/tn/en/kits-de-10-lames-de-scie-sauteuse-wood-a-emmanchement-en-t-2867323-ocs-ac/</li>
+    <li>The Handyman's Daughter. What is saw kerf and why it matters. https://www.thehandymansdaughter.com/?p=42552</li>
+    <li>Popular Woodworking. Shop-made pinch rods. https://popularwoodworking.com/tricks/shop-made-pinch-rods</li>
+    <li>Titebond. Ficha Titebond Original. https://www.titebond.com/print/product/d4d28015-603f-4dfc-a7d9-f684acc71207</li>
+    <li>Titebond. Preguntas frecuentes. https://www.titebond.com/resources/use/all/faqs</li>
+    <li>Kreg. How to use a dowel jig. https://learn.kregtool.com/learn/how-to-use-a-dowel-jig/</li>
+    <li>This Old House. How to choose and use sandpaper. https://www.thisoldhouse.com/tools/how-to-choose-and-use-sandpaper</li>
+    <li>Pinturas Corona. Ficha técnica Sellador Profesional 8083. https://www.pinturascorona.com/images/hojas-tecnicas/madera/ht-8083xx-sellador-profesional--ft-co-17-01.pdf</li>
+    <li>Popular Woodworking. Spontaneous combustion and oil finishes. https://popularwoodworking.com/finishing/spontaneous-combustion-oil-finishes-drape-rags-edge-trash-can-avoid-fire</li>
+    <li>Contexto Ganadero. Las 10 especies forestales maderables más comercializadas en Colombia. https://www.contextoganadero.com/ganaderia-sostenible/las-10-especies-forestales-maderables-mas-comercializadas-en-colombia</li>
+    <li>Woodbin. Wood shrinkage explained. https://woodbin.com/?p=1680</li>
+    <li>This Old House. Generation next: building a first tool box. https://www.thisoldhouse.com/tools/generation-next-building-a-first-tool-box</li>
+    <li>Ana White. Wood toolbox plans. https://ana-white.com/woodworking-projects/wood-toolbox-plans</li>
+  </ol>
+</section>
+
+<section class="capitulo">
+  <h2>Notas</h2>
+  <div class="lineas"></div><div class="lineas"></div><div class="lineas"></div><div class="lineas"></div>
+  <div class="lineas"></div><div class="lineas"></div><div class="lineas"></div><div class="lineas"></div>
+  <div class="lineas"></div><div class="lineas"></div><div class="lineas"></div><div class="lineas"></div>
+  <div class="lineas"></div><div class="lineas"></div><div class="lineas"></div><div class="lineas"></div>
+  <div class="lineas"></div><div class="lineas"></div><div class="lineas"></div><div class="lineas"></div>
+</section>
+
+</body>
+</html>
