@@ -18,6 +18,7 @@ HOLGURA_ENTRE_PUERTAS = 3  # mm entre las dos hojas de una puerta doble
 HOLGURA_ARRIBA = 1  # mm entre el techo y el frente más alto
 HOLGURA_ENTRE_FRENTES = 3  # mm entre frentes de cajón y entre cajón y puerta
 HOLGURA_ABAJO = 1  # mm entre la base y el frente más bajo
+HOLGURA_EMBUTIDA = 1  # mm por lado en piezas que van dentro del cuerpo
 HOLGURA_CORREDERA = 13  # mm por lado; confirmar con la ficha de la corredera
 ALTO_FRENTE_CAJON = 150
 DIFERENCIA_FRENTE_CAJA = 40  # la caja del cajón es 40 mm más baja que su frente

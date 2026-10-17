@@ -6,6 +6,8 @@ Material y herramientas para el **curso de carpintería en melamina**. Son 4 ses
 - `despieces/`: listas de corte de referencia en CSV, en 15 mm.
 - `calculadora/`: genera despieces a partir de las medidas exteriores.
 - `pedido-madecentro/`: plantilla de pedido.
+- `material/`: páginas imprimibles para el curso. `holguras.html` se genera con `python3 calculadora/holguras.py > material/holguras.html`.
+- `piloto/`: hoja para cronometrar el piloto y encuesta final.
 - `ebooks/`: fuentes y versiones corregidas del pack de ebooks.
 - `fotos/`: fotos del closet y del piloto.
 
