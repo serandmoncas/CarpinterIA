@@ -1,0 +1,10 @@
+pieza,cantidad,largo,ancho,espesor,color,L1,L2,A1,A2,veta,notas
+Lateral,2,550,400,15,Ristretto RH,1,0,0,0,,
+Base y techo,2,470,400,15,Ristretto RH,1,0,0,0,,
+Entrepaño fijo,1,470,400,15,Ristretto RH,1,0,0,0,,cara superior a 405
+Fondo,1,546,496,3,HDF,0,0,0,0,,
+Puerta,1,496,395,15,Ristretto RH,1,1,1,1,,
+Frente de cajón,1,496,150,15,Ristretto RH,1,1,1,1,,
+Costado de cajón,2,350,110,15,Ristretto RH,1,0,0,0,,
+Frente interior y trasera de cajón,2,414,110,15,Ristretto RH,1,0,0,0,,
+Fondo de cajón,1,444,350,3,HDF,0,0,0,0,,
