@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Biblioteca: los PDF de terceros quedan solo en local; en git va el índice (biblioteca/README.md)
+biblioteca/**/*
+!biblioteca/**/
+!biblioteca/README.md

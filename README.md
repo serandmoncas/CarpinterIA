@@ -10,6 +10,7 @@ Material y herramientas para el **curso de carpintería en melamina**. Son 4 ses
 - `piloto/`: hoja para cronometrar el piloto y encuesta final.
 - `guia/`: guía del curso para los estudiantes, en HTML y PDF. El texto está en `guia/plantilla.html`; las tablas de holguras y despieces se llenan desde la calculadora con `python3 guia/generar_guia.py --pdf`.
 - `ebooks/`: fuentes y versiones corregidas del pack de ebooks.
+- `biblioteca/`: guías, planos, fichas de herrajes y herramientas de despiece de terceros. En git va solo el índice (`biblioteca/README.md`) con los links; los PDF quedan en local.
 - `fotos/`: fotos del closet y del piloto.
 
 ## Calculadora
