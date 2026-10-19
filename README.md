@@ -26,4 +26,6 @@ python3 -m unittest discover calculadora
 python3 pedido-madecentro/hoja_pedido.py despieces/nochero.csv --cliente "Carlos" > pedido.html
 ```
 
-Se abre en el navegador y se imprime o se guarda como PDF. Incluye el área por material y los metros de tapacanto, que sirven para cotizar.
+Se abre en el navegador y se imprime o se guarda como PDF. Incluye el área por material y los metros de tapacanto, que sirven para cotizar, y cuántos tableros se usan en cada formato (1830 × 2440, 2150 × 2440, 1830 × 2500 y 2070 × 2800), descontando 20 mm de refilado.
+
+Para el optimizador de Madecentro (tablerosmadecentro.com), agrega `--madecentro pedidos/`: escribe un CSV por material con sus columnas (Ancho, Alto, Cantidad, Descripción, Veta, cantos y Servicios), listo para abrir en Excel.

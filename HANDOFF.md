@@ -69,15 +69,16 @@ Holgura de la corredera: unos 13 mm por lado (470 − 26 = 444). **Hay que confi
 - [ ] Cronometrar cada bloque del piloto y hacer una encuesta al final.
 
 ### Material del curso
-- [ ] Definir medidas, despiece y manija de la caja de herramientas del curso express, y agregarla a `despieces/`.
+- [x] Definir medidas, despiece y manija de la caja de herramientas del curso express, y agregarla a `despieces/`.
 - [ ] Confirmar con Madecentro que cortan los despuntes a 45° de las cabeceras de la caja (70 × 70 mm) y les ponen tapacanto. Si no, se cortan en el taller con caladora antes del curso.
 - [ ] Rehacer en 15 mm, con medidas que cuadren, los despieces de MB: cómoda, zapatero, escritorio, estantería y "cómo leer".
 - [ ] Rehacer en MD: la página de descontar espesor (el ejemplo está al revés), el despiece a escala, la optimización 2 (incluir kerf y refilado) y la lista de corte de ejemplo.
-- [ ] Crear la hoja de pedido para Madecentro (CSV y PDF) con las columnas: pieza, cantidad, largo, ancho, espesor, color, cantos (L1 L2 A1 A2), veta y notas.
-- [ ] Crear una página de holguras: 1–3 mm en puertas, unos 13 mm por lado en correderas, 1 mm en piezas embutidas.
+- [x] Crear la hoja de pedido para Madecentro (CSV y PDF) con las columnas: pieza, cantidad, largo, ancho, espesor, color, cantos (L1 L2 A1 A2), veta y notas. Ya calcula el uso en los 4 formatos de tablero y exporta al formato del optimizador de Madecentro.
+- [ ] Confirmar con Madecentro cómo leen los cantos de su optimizador: la exportación pone los largos (L1, L2) a izquierda y derecha y los anchos (A1, A2) arriba y abajo, con Alto = largo de la pieza.
+- [x] Crear una página de holguras: 1–3 mm en puertas, unos 13 mm por lado en correderas, 1 mm en piezas embutidas. Los 13 mm de corredera los confirman Häfele (12,9–13,2) y Arauco (12,5–13); ver `biblioteca/`.
 - [ ] Agregar el confirmat y el sistema 32 a MC.
 - [ ] Aplicar el vocabulario de Colombia y corregir la ortografía. La tabla completa está en el doc de revisión.
-- [ ] Corregir la seguridad: no usar guantes con herramientas que giran, y agregar el anclaje del módulo de closet de 2 m.
+- [ ] Corregir la seguridad: no usar guantes con herramientas que giran, y agregar el anclaje del módulo de closet de 2 m. Ya está en la guía del curso; falta en los ebooks.
 - [ ] Reemplazar las imágenes generadas por fotos reales del closet y del piloto.
 - [ ] En NM, agregar una cotización de ejemplo en pesos, RUT y facturación electrónica, y la garantía según la Ley 1480 de 2011.
 
@@ -92,9 +93,14 @@ Holgura de la corredera: unos 13 mm por lado (470 − 26 = 444). **Hay que confi
 CarpinterIA/
 ├── HANDOFF.md
 ├── despieces/          # una lista de corte CSV por proyecto, en 15 mm
-│   └── nochero.csv
-├── calculadora/        # script que genera despieces a partir de las medidas exteriores y e
-├── pedido-madecentro/  # plantilla de pedido
+│   ├── nochero.csv
+│   └── caja-herramientas.csv
+├── calculadora/        # despiece a partir de las medidas exteriores y e, y página de holguras
+├── pedido-madecentro/  # hoja de pedido imprimible y exportación al optimizador de Madecentro
+├── material/           # páginas imprimibles (holguras)
+├── piloto/             # hoja para cronometrar el piloto y encuesta
+├── guia/               # guía del curso (plantilla HTML, fotos y PDF)
+├── biblioteca/         # índice de guías, planos y fichas de terceros (los PDF quedan en local)
 ├── ebooks/
 │   ├── fuente/
 │   └── corregidos/
